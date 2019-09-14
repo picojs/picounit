@@ -6,18 +6,11 @@ PicoUnit is a minimal, yet powerful, unit testing framework written in C99 suita
 
 ## API
 
-#### PICO_ASSERT(p_expr)
+#### PICO_ASSERT(expr)
 
 Assert that the given expression evaluates to `true`. If the expression evalutes to `false`, execution of the current test and containing test suite abort.
 
-- p_expr - The expression to evaluate
-
-#### PICO_ASSERT_MSG(p_msg, p_expr)
-
-Same as the *ASSERT* macro, however it accepts a message describing the test.
-
-- p_msg  The message to display
-- p_expr The expression to evaluate
+- expr - The expression to evaluate
 
 #### PICO_RUN_TEST(p_test)
 

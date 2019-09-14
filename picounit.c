@@ -34,24 +34,18 @@ static unsigned g_tests_passed = 0;
 
 bool
 pico_assert (bool b_passed,
-             const char* const p_msg,
              const char* const p_expr,
              const char* const p_file,
              int line)
 {
     if (b_passed)
-        return true;
-
-    if (NULL != p_msg)
     {
-        printf("Test failed: %s (%d): %s (%s)\n", p_file, line, p_msg, p_expr);
-    }
-    else
+        return true;
+    } else
     {
         printf("Test failed: %s (%d): %s\n", p_file, line, p_expr);
+        return false;
     }
-
-    return false;
 }
 
 bool
