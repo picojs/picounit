@@ -28,9 +28,9 @@
 /**
  * Assert that the given expression evaluates to true. If the expression
  * evalutes to false, execution of the current test and containing test suite
- * aborts.
+ * abort.
  *
- * @param expr The expression to evaluate
+ * @param p_expr The expression to evaluate
  */
 #define PICO_ASSERT(p_expr) \
     if (!pico_assert(!!(p_expr), NULL, (#p_expr), __FILE__, __LINE__)) \
@@ -39,8 +39,8 @@
 /**
  * Same as the ASSERT macro, however it accepts a message describing the test.
  *
- * @param msg  The message to display
- * @param expr The expression to evaluate
+ * @param p_msg  The message to display
+ * @param p_expr The expression to evaluate
  */
 #define PICO_ASSERT_MSG(p_msg, p_expr) \
     if (!pico_assert(!!(p_expr), (p_msg), (#p_expr), __FILE__, __LINE__)) \
@@ -49,7 +49,7 @@
 /**
  * Runs a unit test function.
  *
- * @param test The test function to execute
+ * @param p_test The test function to execute
  */
 #define PICO_RUN_TEST(p_test) \
     if (!pico_run_test(#p_test, p_test, NULL, NULL)) \
@@ -58,9 +58,9 @@
 /**
  * Runs a unit test function with setup and teardown functions.
  *
- * @param test     The test function to execute
- * @param setup    Setup function that is run before the test function
- * @param teardown Teardown function that is run after the test function
+ * @param p_test     The test function to execute
+ * @param p_setup    Setup function that is run before the test function
+ * @param p_teardown Teardown function that is run after the test function
  */
 #define PICO_RUN_TEST_ST(p_test, p_setup, p_teardown) \
     if (!pico_run_test(#p_test, p_test, p_setup, p_teardown)) \
@@ -69,7 +69,7 @@
 /**
  * Runs a series of unit tests.
  *
- * @param suite The test suite to run
+ * @param p_suite The test suite to run
  */
 #define PICO_RUN_SUITE(p_suite) \
     if (!pico_run_suite(#p_suite, p_suite)) return -1
@@ -82,7 +82,7 @@ typedef void (*pico_setup_t)(void);
 typedef void (*pico_teardown_t)(void);
 typedef bool (*pico_suite_t)(void);
 
-bool pico_assert(bool passed,
+bool pico_assert(bool b_passed,
                  const char* const p_msg,
                  const char* const p_expr,
                  const char* const p_file,
