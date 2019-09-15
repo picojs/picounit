@@ -29,10 +29,11 @@
 #ifndef PICO_UNIT_H
 #define PICO_UNIT_H
 
-#include <stdbool.h>
+#include <stdbool.h> // bool, true, false
+#include <string.h>  // strcmp
 
 /**
- * Assert that the given expression evaluates to true. If the expression
+ * Asserts that the given expression evaluates to true. If the expression
  * evalutes to false, execution of the current test and containing test suite
  * aborts.
  *
@@ -41,6 +42,25 @@
 #define PICO_ASSERT(expr) \
     if (!pico_assert(!!(expr), (#expr), __FILE__, __LINE__)) \
         return false
+
+/**
+ * Asserts that the given expressions evaluates are equal. If the expressions
+ * are not equal, execution of the current test and containing test suite
+ * aborts.
+ *
+ * @param expr The expression to evaluate
+ */
+#define PICO_ASSERT_EQ(left_expr, right_expr) \
+    PICO_ASSERT((left_expr) == (right_expr))
+
+/**
+ * Asserts that the given strings are equal. If the strings are not equal, 
+ * execution of the current test and containing test suite aborts.
+ *
+ * @param expr The expression to evaluate
+ */
+#define PICO_ASSERT_STR_EQ(left_str, right_str) \
+    PICO_ASSERT(strcmp((left_str), (right_str)) == 0)
 
 /**
  * Runs a unit test function.
