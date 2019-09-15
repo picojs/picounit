@@ -1,11 +1,9 @@
-# Makefile to build example
+CC     =gcc
+CFLAGS=-I.
+DEPS  = picounit.h
 
-tests: example.o picounit.o
-    gcc -o tests example.o picounit.o
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-example.o: example.c picounit.h
-    gcc -c example.c
-
-picounit.o: picounit.c picounit.h
-    gcc -c picounit.c
-
+example: example.o picounit.o 
+	$(CC) -o example example.o picounit.o
