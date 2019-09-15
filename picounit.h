@@ -36,7 +36,7 @@
  * evalutes to false, execution of the current test and containing test suite
  * aborts.
  *
- * @param p_expr The expression to evaluate
+ * @param expr The expression to evaluate
  */
 #define PICO_ASSERT(expr) \
     if (!pico_assert(!!(expr), (#expr), __FILE__, __LINE__)) \
@@ -71,7 +71,7 @@
     if (!pico_run_suite(#p_suite, p_suite)) return -1
 
 /*
- * NOTE: These declarations are used internally.
+ * NOTE: These declarations are used internally and should not be used directly.
  */
 typedef bool (*pico_test_t)(void);
 typedef void (*pico_setup_t)(void);
