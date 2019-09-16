@@ -41,8 +41,8 @@
  *
  * @param expr The expression to evaluate
  */
-#define PICO_ASSERT(expr) \
-    if (!pico_assert(!!(expr), (#expr), __FILE__, __LINE__)) \
+#define PICO_ASSERT(b_expr) \
+    if (!pico_assert(!!(b_expr), (#b_expr), __FILE__, __LINE__)) \
         return false
 
 /**
@@ -63,8 +63,8 @@
  * @param left_str  A string to compare
  * @param right_str A string to compare
  */
-#define PICO_ASSERT_STR_EQ(left_str, right_str) \
-    PICO_ASSERT(strcmp((left_str), (right_str)) == 0)
+#define PICO_ASSERT_EQ_STR(p_left_str, p_right_str) \
+    PICO_ASSERT(strcmp((p_left_str), (p_right_str)) == 0)
 
 /**
  * Runs a unit test function.
@@ -102,7 +102,7 @@ typedef void (*pico_setup_t)(void);
 typedef void (*pico_teardown_t)(void);
 typedef bool (*pico_suite_t)(void);
 
-bool pico_assert(bool b_passed,
+bool pico_assert(bool b_expr,
                  const char* const p_expr,
                  const char* const p_file,
                  int line);
@@ -112,7 +112,8 @@ bool pico_run_test(const char* const p_name,
                    pico_setup_t p_setup,
                    pico_teardown_t p_teardown);
 
-bool pico_run_suite(const char* const p_name, pico_suite_t p_suite);
+bool pico_run_suite(const char* const p_name, 
+                    pico_suite_t p_suite);
 
 #endif // PICO_UNIT_H
 

@@ -22,10 +22,64 @@
  * IN THE SOFTWARE.
 =============================================================================*/
 
+#include "picounit.h"
+
 #include <stdio.h>
+
+static unsigned g_fix = 0;
+
+bool test_passing1()
+{
+    PICO_ASSERT(true);
+    PICO_ASSERT_EQ(42, 42);
+    PICO_ASSERT_EQ_STR("towel", "towel");
+    return true;
+}
+
+void test_setup()
+{
+    g_fix = 42;
+}
+
+void test_teardown()
+{
+    g_fix = 0;
+}
+
+bool test_passing2()
+{
+    PICO_ASSERT(42 == g_fix);
+    PICO_ASSERT_EQ_STR("frog", "frog");
+    return true;
+}
+
+bool test_failing()
+{
+    PICO_ASSERT(true);
+    PICO_ASSERT(false); // Fails here
+    PICO_ASSERT(true);
+    return true;
+}
+
+bool suite_passing()
+{
+    PICO_RUN_TEST(test_passing1);
+    PICO_RUN_TEST_ST(test_passing2, test_setup, test_teardown);
+    return true;
+}
+
+bool suite_failing()
+{
+    PICO_RUN_TEST(test_passing1);
+    PICO_RUN_TEST(test_failing);
+    PICO_RUN_TEST(test_passing1);
+    return true;
+}
+
 
 int main (int argc, char** argv)
 {
-    printf("Hello World!\n");
+    PICO_RUN_SUITE(suite_passing);
+    PICO_RUN_SUITE(suite_failing);
     return 0;
 }
