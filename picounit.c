@@ -49,7 +49,7 @@ pico_assert (bool b_passed,
         return true;
     } else
     {
-        printf("Test failed: %s (%d): %s\n", p_file, line, p_expr);
+        printf("Assertion failed: %s (%d): %s\n", p_file, line, p_expr);
         return false;
     }
 }
@@ -97,7 +97,7 @@ pico_run_suite (const char* const p_name, pico_suite_t p_suite)
     }
     else
     {
-        printf("%c%sSuccess!%c%s",
+        printf("%c%sSuccess!%c%s ",
                TERM_COLOR_CODE, TERM_COLOR_GREEN,
                TERM_COLOR_CODE, TERM_COLOR_RESET);
 

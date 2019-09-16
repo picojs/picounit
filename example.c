@@ -56,7 +56,7 @@ bool test_passing2()
 bool test_failing()
 {
     PICO_ASSERT(true);
-    PICO_ASSERT(false); // Fails here
+    PICO_ASSERT(24 == 42); // Fails here
     PICO_ASSERT(true);
     return true;
 }
