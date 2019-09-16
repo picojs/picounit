@@ -1,16 +1,28 @@
-# PicoUnit
+PicoUnit
+========
 
-## Introduction
+PicoUnit is a minimal, yet powerful unit testing framework written in C99. Due to its small footprint, PicoUnit is suitable for embedded as well as general development.
 
-PicoUnit is a minimal, yet powerful, unit testing framework written in C99 suitable for general and embedded development.
-
-## API
+API
+--------
 
 #### PICO_ASSERT(expr)
 
-Assert that the given expression evaluates to `true`. If the expression evalutes to `false`, execution of the current test and containing test suite abort.
+Asserts that the given expression evaluates to `true`. If the expression evalutes to `false`, execution of the current test and containing test suite aborts.
 
 - expr - The expression to evaluate
+
+#### PICO_ASSERT_EQ(left_expr, right_expr)
+
+Asserts that the given expressions evaluates are equal. If the expressions are not equal, execution of the current test and containing test suite aborts.
+
+- left_expr  An expression to compare
+- right_expr An expression to compare
+
+#### PICO_ASSERT_STR_EQ(left_str, right_str)
+
+- left_str  A string to compare
+- right_str A string to compare
 
 #### PICO_RUN_TEST(p_test)
 
@@ -28,6 +40,8 @@ Runs a unit test function with setup and teardown functions.
 
 #### PICO_RUN_SUITE(p_suite)
 
-- p_suite The test suite to run
+- p_suite The test suite functionto run
 
-
+## License
+Copyright (c) 2019 James McLean  
+Licensed under the MIT license

@@ -1,6 +1,6 @@
-CC     =gcc
-CFLAGS=-I.
-DEPS  = picounit.h
+CC     = gcc
+CFLAGS = -std=c99 -I.
+DEPS   = picounit.h
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
