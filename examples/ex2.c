@@ -22,12 +22,13 @@
  * IN THE SOFTWARE.
 =============================================================================*/
 
-#include "picounit.h"
+#include <picounit.h>
 
 #include <stdio.h>
 
 static unsigned g_fix = 0;
 
+// All assertions pass in this test.
 bool test_passing1()
 {
     PICO_ASSERT(true);
@@ -36,16 +37,20 @@ bool test_passing1()
     return true;
 }
 
+// Sets up fixture (called before test).
 void test_setup()
 {
     g_fix = 42;
 }
 
+// Resets fixture (called after test).
 void test_teardown()
 {
     g_fix = 0;
 }
 
+// All assertions pass in this test. Checks the value of the fixture set up in
+// the test setup function.
 bool test_passing2()
 {
     PICO_ASSERT(42 == g_fix);
@@ -53,21 +58,24 @@ bool test_passing2()
     return true;
 }
 
+// Test containing failing assertion.
 bool test_failing1()
 {
     PICO_ASSERT(true);
     PICO_ASSERT(24 == 42); // Fails here
-    PICO_ASSERT(true);
+    PICO_ASSERT(true);     // Never called
     return true;
 }
 
+// Another test containing a failed assertion.
 bool test_failing2()
 {
-    PICO_ASSERT_EQ_STR("frog", "butterfly");
-    PICO_ASSERT(true); // Never called
+    PICO_ASSERT_EQ_STR("frog", "butterfly"); // Fails here
+    PICO_ASSERT(true);                       // Never called
     return true;
 }
 
+// A test suite containing two passing and one failing test.
 void test_suite1()
 {
     PICO_RUN_TEST(test_passing1);
@@ -75,6 +83,7 @@ void test_suite1()
     PICO_RUN_TEST(test_failing1);
 }
 
+// A test suite containing two passing and one failing test.
 void test_suite2()
 {
     PICO_RUN_TEST(test_passing1);
@@ -82,7 +91,7 @@ void test_suite2()
     PICO_RUN_TEST(test_passing1);
 }
 
-
+// Run all test suites and print test statistics.
 int main (int argc, char** argv)
 {
     PICO_RUN_SUITE(test_suite1);

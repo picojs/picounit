@@ -42,6 +42,60 @@ Runs a unit test function with setup and teardown functions.
 
 - p_suite The test suite functionto run
 
+Example
+--------
+
+```c
+#include <picounit.h>
+
+// Passing test.
+bool 
+test1 ()
+{
+    PICO_ASSERT(2 + 2 == 4);                // Simple boolean assertion (ok)
+    PICO_ASSERT_EQ(2 + 2, 4);               // Equivalent to the above (ok)
+    PICO_ASSERT_EQ_STR("apples", "apples"); // String equality assertion (ok)
+    return true;
+}
+
+// Failing test.
+bool 
+test2 ()
+{
+    PICO_ASSERT(1 == 0);                     // Simple boolean assertion (fails)
+    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion 
+                                             // (fails but never called)
+    return true;
+}
+
+// Mixed results.
+bool 
+test3 ()
+{
+    PICO_ASSERT(2 + 2 == 4);                 // Simple boolean assertion (ok)
+    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion 
+                                             // (fails)
+    return true;
+}
+
+// Test suite container function (multiple test suits can be specified.
+void
+test_suite()
+{
+    PICO_RUN_TEST(test1);
+    PICO_RUN_TEST(test2);
+    PICO_RUN_TEST(test3);
+}
+
+int
+main (int argc, char* argv[])
+{
+    PICO_RUN_SUITE(test_suite);
+    PICO_PRINT_STATS();
+    return 0;
+}
+```
+
 ## License
 Copyright (c) 2019 James McLean  
 Licensed under the MIT license

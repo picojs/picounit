@@ -4,9 +4,9 @@
  * Copyright (c) 2019 James McLean
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to 
- * deal in the Software without restriction, including without limitation the 
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
  * sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
@@ -17,7 +17,7 @@
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
 =============================================================================*/
@@ -28,7 +28,6 @@
 
 #include "picounit.h"
 
-#include <stddef.h>  // NULL
 #include <string.h>  // strcmp
 #include <stdio.h>   // prinf
 
@@ -38,8 +37,8 @@
 #define TERM_COLOR_RESET "[0m"
 
 static unsigned g_num_asserts = 0;
-static unsigned g_num_passed = 0;
-static unsigned g_num_failed = 0;
+static unsigned g_num_passed  = 0;
+static unsigned g_num_failed  = 0;
 
 bool
 pico_assert (bool b_passed,
@@ -52,10 +51,10 @@ pico_assert (bool b_passed,
     if (b_passed)
     {
         return true;
-    } 
+    }
     else
     {
-        printf("\n%c%sFailure%c%s: %s (%d): %s\n", 
+        printf("\n%c%sFailure%c%s: %s (%d): %s\n",
                 TERM_COLOR_CODE, TERM_COLOR_RED,
                 TERM_COLOR_CODE, TERM_COLOR_RESET,
                 p_file, line, p_expr);
@@ -64,7 +63,7 @@ pico_assert (bool b_passed,
     }
 }
 
-bool 
+bool
 pico_assert_eq_str (const char* const p_left_str,
                     const char* const p_right_str,
                     const char* const p_file,
@@ -78,11 +77,11 @@ pico_assert_eq_str (const char* const p_left_str,
     }
     else
     {
-        printf("\n%c%sFailure%c%s: %s (%d): \"%s\" == \"%s\"\n", 
+        printf("\n%c%sFailure%c%s: %s (%d): \"%s\" == \"%s\"\n",
                 TERM_COLOR_CODE, TERM_COLOR_RED,
                 TERM_COLOR_CODE, TERM_COLOR_RESET,
                 p_file, line, p_left_str, p_right_str);
-        
+
         return false;
     }
 }
@@ -100,7 +99,7 @@ pico_run_test (const char* const p_name,
 
     printf("Running: %s ", p_name);
 
-    if (!p_test()) 
+    if (!p_test())
     {
         g_num_failed++;
     }
@@ -111,7 +110,7 @@ pico_run_test (const char* const p_name,
 
         g_num_passed++;
     }
-    
+
     if (NULL != p_teardown)
     {
         p_teardown();

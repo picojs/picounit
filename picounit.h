@@ -32,6 +32,7 @@
 #define PICO_UNIT_H
 
 #include <stdbool.h> // bool, true, false
+#include <stddef.h> // NULL
 
 /**
  * Asserts that the given expression evaluates to true. If the expression
