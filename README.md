@@ -1,32 +1,37 @@
 PicoUnit
 ========
 
-PicoUnit is a minimal, yet powerful unit testing framework written in C99. Due 
-to its small footprint, PicoUnit is suitable for embedded as well as general 
+PicoUnit is a minimal, yet powerful unit testing framework written in C99.
+Due to its small footprint, PicoUnit is suitable for embedded as well as general 
 development.
 
-**Features:**
+Features:
+--------
+
 - Only two files for easy integration into any build system
-- Tiny memory and code footprint, with no dynamic memory allocation
+- Tiny memory and code footprint with no dynamic memory allocation
 - All unit tests are run during execution and failures indicated
 - Ability to group tests into test suites
 - Ability to print test statistics
+- Test setup and teardown function support
 - Simple and minimalistic API
 
-API
+API:
 --------
 
 #### PICO_ASSERT(expr)
 
 Asserts that the given expression evaluates to `true`. If the expression
-evalutes to false, execution of the current test aborts.
+evalutes to `false,` execution of the current test aborts, and an error
+message is displayed.
 
 - expr - The expression to evaluate
 
 #### PICO_ASSERT_EQ(left_expr, right_expr)
 
 Asserts that the given expressions evaluates are equal. If the expressions
-are not equal, execution of the current test aborts.
+are not equal, execution of the current test aborts, and an error message is
+displayed.
 
 - left_expr  An expression to compare
 - right_expr An expression to compare
@@ -34,14 +39,14 @@ are not equal, execution of the current test aborts.
 #### PICO_ASSERT_STR_EQ(p_left_str, p_right_str)
 
 Asserts that the given strings are equal. If the strings are not equal,
-execution of the current test aborts.
+execution of the current test aborts, and an error message is displayed.
 
 - left_str  A string to compare
 - right_str A string to compare
 
 #### PICO_RUN_TEST(p_test)
 
-Runs a unit test function. **IMPORTANT**: The function `p_test` must 
+Runs a unit test function. **IMPORTANT**: The function `p_test` must
 return `true`.
 
 - p_test The test function to execute
@@ -56,9 +61,11 @@ Runs a unit test function with setup and teardown functions.
 
 #### PICO_RUN_SUITE(p_suite)
 
+Runs a series of unit tests.
+
 - p_suite The test suite function to run
 
-Example
+Example:
 --------
 
 ```C
@@ -67,7 +74,7 @@ Example
 // Passing test. Note that the test function declaration returns a boolean value
 // and that the test definition returns true. All test functions must return
 // true.
-bool 
+bool
 test1 ()
 {
     PICO_ASSERT(2 + 2 == 4);                // Simple boolean assertion (ok)
@@ -77,21 +84,21 @@ test1 ()
 }
 
 // Failing test.
-bool 
+bool
 test2 ()
 {
     PICO_ASSERT(1 == 0);                     // Simple boolean assertion (fails)
-    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion 
+    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion
                                              // (fails but never called)
     return true;
 }
 
 // Mixed results.
-bool 
+bool
 test3 ()
 {
     PICO_ASSERT(2 + 2 == 4);                 // Simple boolean assertion (ok)
-    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion 
+    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion
                                              // (fails)
     return true;
 }
@@ -116,5 +123,5 @@ main (int argc, char* argv[])
 ```
 
 ## License
-Copyright (c) 2019 James McLean  
+Copyright (c) 2019 James McLean
 Licensed under the MIT license

@@ -1,7 +1,7 @@
 /** \file picounit.h
- * PicoUnit - PicoUnit is a minimal, yet powerful unit testing framework
- * written in C99. Due to its small footprint, PicoUnit is suitable for
- * embedded as well as general development.
+ * PicoUnit is a minimal, yet powerful unit testing framework written in C99.
+ * Due to its small footprint, PicoUnit is suitable for embedded as well as
+ * general development.
  */
 
 /*=============================================================================
@@ -36,7 +36,8 @@
 
 /**
  * Asserts that the given expression evaluates to true. If the expression
- * evalutes to false, execution of the current test aborts.
+ * evalutes to false, execution of the current test aborts, and an error
+ * message is displayed.
  *
  * @param expr The expression to evaluate
  */
@@ -46,7 +47,8 @@
 
 /**
  * Asserts that the given expressions evaluates are equal. If the expressions
- * are not equal, execution of the current test aborts.
+ * are not equal, execution of the current test aborts, and an error message is
+ * displayed.
  *
  * @param left_expr  An expression to compare
  * @param right_expr An expression to compare
@@ -56,7 +58,8 @@
 
 /**
  * Asserts that the given strings are equal. If the strings are not equal,
- * execution of the current test aborts.
+ * execution of the current test aborts, and an error message is
+ * displayed.
  *
  * @param left_str  A string to compare
  * @param right_str A string to compare
