@@ -45,7 +45,7 @@ Runs a unit test function with setup and teardown functions.
 Example
 --------
 
-```c
+```C
 #include <picounit.h>
 
 // Passing test.
@@ -78,7 +78,7 @@ test3 ()
     return true;
 }
 
-// Test suite container function (multiple test suits can be specified.
+// Test suite container function (multiple test suites can be specified).
 void
 test_suite()
 {
@@ -87,6 +87,7 @@ test_suite()
     PICO_RUN_TEST(test3);
 }
 
+// Run all test suites and print test statistics.
 int
 main (int argc, char* argv[])
 {
