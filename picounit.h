@@ -1,6 +1,6 @@
 /** \file picounit.h
- * PicoUnit - PicoUnit is a minimal, yet powerful unit testing framework 
- * written in C99. Due to its small footprint, PicoUnit is suitable for 
+ * PicoUnit - PicoUnit is a minimal, yet powerful unit testing framework
+ * written in C99. Due to its small footprint, PicoUnit is suitable for
  * embedded as well as general development.
  */
 
@@ -10,9 +10,9 @@
  * Copyright (c) 2019 James McLean
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to 
- * deal in the Software without restriction, including without limitation the 
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
  * sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
@@ -23,7 +23,7 @@
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
 =============================================================================*/
@@ -32,7 +32,6 @@
 #define PICO_UNIT_H
 
 #include <stdbool.h> // bool, true, false
-#include <string.h>  // strcmp
 
 /**
  * Asserts that the given expression evaluates to true. If the expression
@@ -57,14 +56,15 @@
     PICO_ASSERT((left_expr) == (right_expr))
 
 /**
- * Asserts that the given strings are equal. If the strings are not equal, 
+ * Asserts that the given strings are equal. If the strings are not equal,
  * execution of the current test and containing test suite aborts.
  *
  * @param left_str  A string to compare
  * @param right_str A string to compare
  */
 #define PICO_ASSERT_EQ_STR(p_left_str, p_right_str) \
-    PICO_ASSERT(strcmp((p_left_str), (p_right_str)) == 0)
+    if (!pico_assert_eq_str(p_left_str, p_right_str, __FILE__, __LINE__)) \
+        return false
 
 /**
  * Runs a unit test function.
@@ -109,12 +109,17 @@ bool pico_assert(bool b_expr,
                  const char* const p_file,
                  int line);
 
+bool pico_assert_eq_str(const char* const p_left_str,
+                        const char* const p_right_str,
+                        const char* const p_file,
+                        int line);
+
 void pico_run_test(const char* const p_name,
                    pico_test_t p_test,
                    pico_setup_t p_setup,
                    pico_teardown_t p_teardown);
 
-void pico_run_suite(const char* const p_name, 
+void pico_run_suite(const char* const p_name,
                     pico_suite_t p_suite);
 
 void pico_print_stats();

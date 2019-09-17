@@ -28,8 +28,9 @@
 
 #include "picounit.h"
 
-#include <stddef.h>
-#include <stdio.h>
+#include <stddef.h>  // NULL
+#include <string.h>  // strcmp
+#include <stdio.h>   // prinf
 
 #define TERM_COLOR_CODE 0x1B
 #define TERM_COLOR_RED "[1;31m"
@@ -63,6 +64,29 @@ pico_assert (bool b_passed,
     }
 }
 
+bool 
+pico_assert_eq_str (const char* const p_left_str,
+                    const char* const p_right_str,
+                    const char* const p_file,
+                    int line)
+{
+    g_num_asserts++;
+
+    if (strcmp(p_left_str, p_right_str) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        printf("\n%c%sFailure%c%s: %s (%d): \"%s\" == \"%s\"\n", 
+                TERM_COLOR_CODE, TERM_COLOR_RED,
+                TERM_COLOR_CODE, TERM_COLOR_RESET,
+                p_file, line, p_left_str, p_right_str);
+        
+        return false;
+    }
+}
+
 void
 pico_run_test (const char* const p_name,
                pico_test_t p_test,
@@ -83,7 +107,7 @@ pico_run_test (const char* const p_name,
     else
     {
         printf("(%c%sOK%c%s)\n", TERM_COLOR_CODE, TERM_COLOR_GREEN,
-                                  TERM_COLOR_CODE, TERM_COLOR_RESET);
+                                 TERM_COLOR_CODE, TERM_COLOR_RESET);
 
         g_num_passed++;
     }
