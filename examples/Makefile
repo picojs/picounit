@@ -14,7 +14,7 @@ ex1: ex1.o picounit.o $(DEPS)
 	$(CC) -o ex1 ex1.o picounit.o
 
 ex2: ex2.o picounit.o $(DEPS)
-	$(CC) -o ex2 ex1.o picounit.o
+	$(CC) -o ex2 ex2.o picounit.o
 
 .PHONY: clean
 

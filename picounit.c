@@ -39,6 +39,7 @@
 static unsigned g_num_asserts = 0;
 static unsigned g_num_passed  = 0;
 static unsigned g_num_failed  = 0;
+static unsigned g_num_suites = 0;
 
 bool
 pico_assert (bool b_passed,
@@ -122,17 +123,18 @@ pico_run_suite (const char* const p_name, pico_suite_t p_suite)
 {
     printf("===============================================================\n");
     printf("Running: %s\n", p_name);
-    printf("===============================================================\n");
+    printf("---------------------------------------------------------------\n");
     p_suite();
+    g_num_suites++;
 }
 
 void
 pico_print_stats()
 {
     printf("===============================================================\n");
-    printf("Summary: Passed: %u, Failed: %u, Total: %u, Asserts: %u\n",
-           g_num_passed,  g_num_failed,
-           g_num_passed + g_num_failed, g_num_asserts);
+    printf("Summary: Passed: %u, Failed: %u, Total: %u, Suites: %u, Asserts: %u\n",
+            g_num_passed,  g_num_failed, g_num_passed + g_num_failed, 
+            g_num_suites, g_num_asserts);
 }
 
 /* EoF */
