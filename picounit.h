@@ -72,8 +72,7 @@
  * @param p_test The test function to execute
  */
 #define PICO_RUN_TEST(p_test) \
-    if (!pico_run_test(#p_test, p_test, NULL, NULL)) \
-        return false
+    pico_run_test(#p_test, p_test, NULL, NULL)
 
 /**
  * Runs a unit test function with setup and teardown functions.
@@ -83,16 +82,19 @@
  * @param p_teardown Teardown function that is run after the test function
  */
 #define PICO_RUN_TEST_ST(p_test, p_setup, p_teardown) \
-    if (!pico_run_test(#p_test, p_test, p_setup, p_teardown)) \
-        return false
+    pico_run_test(#p_test, p_test, p_setup, p_teardown)
 
 /**
  * Runs a series of unit tests.
  *
  * @param p_suite The test suite function to run
  */
-#define PICO_RUN_SUITE(p_suite) \
-    if (!pico_run_suite(#p_suite, p_suite)) return -1
+#define PICO_RUN_SUITE(p_suite) pico_run_suite(#p_suite, p_suite)
+
+/**
+ * Print test statistics.
+ */
+#define PICO_PRINT_STATS() pico_print_stats()
 
 /*
  * NOTE: These declarations are used internally and should not be used directly.
@@ -100,20 +102,22 @@
 typedef bool (*pico_test_t)(void);
 typedef void (*pico_setup_t)(void);
 typedef void (*pico_teardown_t)(void);
-typedef bool (*pico_suite_t)(void);
+typedef void (*pico_suite_t)(void);
 
 bool pico_assert(bool b_expr,
                  const char* const p_expr,
                  const char* const p_file,
                  int line);
 
-bool pico_run_test(const char* const p_name,
+void pico_run_test(const char* const p_name,
                    pico_test_t p_test,
                    pico_setup_t p_setup,
                    pico_teardown_t p_teardown);
 
-bool pico_run_suite(const char* const p_name, 
+void pico_run_suite(const char* const p_name, 
                     pico_suite_t p_suite);
+
+void pico_print_stats();
 
 #endif // PICO_UNIT_H
 

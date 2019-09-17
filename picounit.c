@@ -36,7 +36,9 @@
 #define TERM_COLOR_GREEN "[1;32m"
 #define TERM_COLOR_RESET "[0m"
 
-static unsigned g_tests_passed = 0;
+static unsigned g_num_asserts = 0;
+static unsigned g_num_passed = 0;
+static unsigned g_num_failed = 0;
 
 bool
 pico_assert (bool b_passed,
@@ -44,17 +46,24 @@ pico_assert (bool b_passed,
              const char* const p_file,
              int line)
 {
+    g_num_asserts++;
+
     if (b_passed)
     {
         return true;
-    } else
+    } 
+    else
     {
-        printf("Assertion failed: %s (%d): %s\n", p_file, line, p_expr);
+        printf("\n%c%sFailure%c%s: %s (%d): %s\n", 
+                TERM_COLOR_CODE, TERM_COLOR_RED,
+                TERM_COLOR_CODE, TERM_COLOR_RESET,
+                p_file, line, p_expr);
+
         return false;
     }
 }
 
-bool
+void
 pico_run_test (const char* const p_name,
                pico_test_t p_test,
                pico_setup_t p_setup,
@@ -65,46 +74,42 @@ pico_run_test (const char* const p_name,
         p_setup();
     }
 
-    printf("Running test: %s\n", p_name);
+    printf("Running: %s ", p_name);
 
-    if (!p_test())
-        return false;
+    if (!p_test()) 
+    {
+        g_num_failed++;
+    }
+    else
+    {
+        printf("(%c%sOK%c%s)\n", TERM_COLOR_CODE, TERM_COLOR_GREEN,
+                                  TERM_COLOR_CODE, TERM_COLOR_RESET);
 
+        g_num_passed++;
+    }
+    
     if (NULL != p_teardown)
     {
         p_teardown();
     }
-
-    g_tests_passed++;
-
-    return true;
 }
 
-bool
+void
 pico_run_suite (const char* const p_name, pico_suite_t p_suite)
 {
-    printf("==================================================\n");
-    printf("Running suite: %s\n", p_name);
-    printf("==================================================\n");
+    printf("===============================================================\n");
+    printf("Running: %s\n", p_name);
+    printf("===============================================================\n");
+    p_suite();
+}
 
-    if (!p_suite())
-    {
-        printf("%c%sFailed!%c%s\n",
-               TERM_COLOR_CODE, TERM_COLOR_RED,
-               TERM_COLOR_CODE, TERM_COLOR_RESET);
-
-        return false;
-    }
-    else
-    {
-        printf("%c%sSuccess!%c%s ",
-               TERM_COLOR_CODE, TERM_COLOR_GREEN,
-               TERM_COLOR_CODE, TERM_COLOR_RESET);
-
-        printf("(%u tests passed)\n", g_tests_passed);
-
-        return true;
-    }
+void
+pico_print_stats()
+{
+    printf("===============================================================\n");
+    printf("Summary: Passed: %u, Failed: %u, Total: %u, Asserts: %u\n",
+           g_num_passed,  g_num_failed,
+           g_num_passed + g_num_failed, g_num_asserts);
 }
 
 /* EoF */

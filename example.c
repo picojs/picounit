@@ -61,19 +61,17 @@ bool test_failing()
     return true;
 }
 
-bool suite_passing()
+void suite_passing()
 {
     PICO_RUN_TEST(test_passing1);
     PICO_RUN_TEST_ST(test_passing2, test_setup, test_teardown);
-    return true;
 }
 
-bool suite_failing()
+void suite_failing()
 {
     PICO_RUN_TEST(test_passing1);
     PICO_RUN_TEST(test_failing);
     PICO_RUN_TEST(test_passing1);
-    return true;
 }
 
 
@@ -81,5 +79,6 @@ int main (int argc, char** argv)
 {
     PICO_RUN_SUITE(suite_passing);
     PICO_RUN_SUITE(suite_failing);
+    PICO_PRINT_STATS();
     return 0;
 }
