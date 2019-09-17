@@ -36,8 +36,7 @@
 
 /**
  * Asserts that the given expression evaluates to true. If the expression
- * evalutes to false, execution of the current test and containing test suite
- * aborts.
+ * evalutes to false, execution of the current test aborts.
  *
  * @param expr The expression to evaluate
  */
@@ -47,8 +46,7 @@
 
 /**
  * Asserts that the given expressions evaluates are equal. If the expressions
- * are not equal, execution of the current test and containing test suite
- * aborts.
+ * are not equal, execution of the current test aborts.
  *
  * @param left_expr  An expression to compare
  * @param right_expr An expression to compare
@@ -58,7 +56,7 @@
 
 /**
  * Asserts that the given strings are equal. If the strings are not equal,
- * execution of the current test and containing test suite aborts.
+ * execution of the current test aborts.
  *
  * @param left_str  A string to compare
  * @param right_str A string to compare
@@ -68,7 +66,8 @@
         return false
 
 /**
- * Runs a unit test function.
+ * Runs a unit test function. IMPORTANT: The function `p_test` must
+ * return `true`.
  *
  * @param p_test The test function to execute
  */

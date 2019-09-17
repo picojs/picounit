@@ -28,7 +28,9 @@
 
 #include <picounit.h>
 
-// Passing test.
+// Passing test. Note that the test function declaration returns a boolean value
+// and that the test definition returns true. All test functions must return
+// true.
 bool 
 test1 ()
 {
