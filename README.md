@@ -2,14 +2,14 @@ PicoUnit
 ========
 
 PicoUnit is a minimal, yet powerful unit testing framework written in C99.
-Due to its small footprint, PicoUnit is suitable for embedded as well as general 
+Due to its small footprint, PicoUnit is suitable for embedded as well as general
 development.
 
 Features:
 --------
 
-- Only two files for easy integration into any build system
-- Tiny memory and code footprint with no dynamic memory allocation
+- Only two files (header/source) for easy integration into any build system
+- Tiny memory and code footprint
 - All unit tests are run during execution and failures indicated
 - Ability to group tests into test suites
 - Ability to print test statistics
@@ -22,7 +22,7 @@ API:
 #### PICO_ASSERT(expr)
 
 Asserts that the given expression evaluates to `true`. If the expression
-evalutes to `false,` execution of the current test aborts, and an error
+evalutes to `false,` execution of the current test aborts and an error
 message is displayed.
 
 - expr - The expression to evaluate
@@ -30,7 +30,7 @@ message is displayed.
 #### PICO_ASSERT_EQ(left_expr, right_expr)
 
 Asserts that the given expressions evaluates are equal. If the expressions
-are not equal, execution of the current test aborts, and an error message is
+are not equal, execution of the current test aborts and an error message is
 displayed.
 
 - left_expr  An expression to compare
@@ -39,7 +39,7 @@ displayed.
 #### PICO_ASSERT_STR_EQ(p_left_str, p_right_str)
 
 Asserts that the given strings are equal. If the strings are not equal,
-execution of the current test aborts, and an error message is displayed.
+execution of the current test aborts and an error message is displayed.
 
 - left_str  A string to compare
 - right_str A string to compare

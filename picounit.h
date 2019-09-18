@@ -32,11 +32,11 @@
 #define PICO_UNIT_H
 
 #include <stdbool.h> // bool, true, false
-#include <stddef.h> // NULL
+#include <stddef.h>  // NULL
 
 /**
  * Asserts that the given expression evaluates to true. If the expression
- * evalutes to false, execution of the current test aborts, and an error
+ * evalutes to false, execution of the current test aborts and an error
  * message is displayed.
  *
  * @param expr The expression to evaluate
@@ -47,7 +47,7 @@
 
 /**
  * Asserts that the given expressions evaluates are equal. If the expressions
- * are not equal, execution of the current test aborts, and an error message is
+ * are not equal, execution of the current test aborts and an error message is
  * displayed.
  *
  * @param left_expr  An expression to compare
@@ -58,7 +58,7 @@
 
 /**
  * Asserts that the given strings are equal. If the strings are not equal,
- * execution of the current test aborts, and an error message is
+ * execution of the current test aborts and an error message is
  * displayed.
  *
  * @param left_str  A string to compare
