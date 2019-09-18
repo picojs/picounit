@@ -55,7 +55,7 @@ pico_assert (bool b_passed,
     }
     else
     {
-        printf("\n%c%sFailure%c%s: %s (%d): %s\n",
+        printf("(%c%sFAILED%c%s: %s (%d): %s)\n",
                 TERM_COLOR_CODE, TERM_COLOR_RED,
                 TERM_COLOR_CODE, TERM_COLOR_RESET,
                 p_file, line, p_expr);
@@ -78,7 +78,7 @@ pico_assert_eq_str (const char* const p_left_str,
     }
     else
     {
-        printf("\n%c%sFailure%c%s: %s (%d): \"%s\" == \"%s\"\n",
+        printf("(%c%sFAILED%c%s: %s (%d): \"%s\" == \"%s\")\n",
                 TERM_COLOR_CODE, TERM_COLOR_RED,
                 TERM_COLOR_CODE, TERM_COLOR_RESET,
                 p_file, line, p_left_str, p_right_str);
