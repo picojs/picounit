@@ -99,6 +99,10 @@
  */
 #define PICO_PRINT_STATS() pico_print_stats()
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * NOTE: These declarations are used internally and should not be used directly.
  */
@@ -126,6 +130,10 @@ void pico_run_suite(const char* const p_name,
                     pico_suite_t p_suite);
 
 void pico_print_stats();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // PICO_UNIT_H
 
