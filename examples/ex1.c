@@ -31,31 +31,30 @@
 // Passing test. Note that the test function declaration returns a boolean value
 // and that the test definition returns true. All test functions must return
 // true.
-bool 
+bool
 test1 ()
 {
     PICO_ASSERT(2 + 2 == 4);                // Simple boolean assertion (ok)
-    PICO_ASSERT_EQ(2 + 2, 4);               // Equivalent to the above (ok)
-    PICO_ASSERT_EQ_STR("apples", "apples"); // String equality assertion (ok)
+    PICO_ASSERT_STR_EQ("apples", "apples"); // String equality assertion (ok)
     return true;
 }
 
 // Failing test.
-bool 
+bool
 test2 ()
 {
-    PICO_ASSERT(1 == 0);                     // Simple boolean assertion (fails)
-    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion 
+PICO_ASSERT(2 + 2 != 4);                     // Simple boolean assertion (fails)
+    PICO_ASSERT_STR_EQ("apples", "oranges"); // String equality assertion
                                              // (fails but never called)
     return true;
 }
 
 // Mixed results.
-bool 
+bool
 test3 ()
 {
     PICO_ASSERT(2 + 2 == 4);                 // Simple boolean assertion (ok)
-    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion 
+    PICO_ASSERT_STR_EQ("apples", "oranges"); // String equality assertion
                                              // (fails)
     return true;
 }

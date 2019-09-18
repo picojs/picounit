@@ -46,17 +46,6 @@
         return false
 
 /**
- * Asserts that the given expressions evaluates are equal. If the expressions
- * are not equal, execution of the current test aborts and an error message is
- * displayed.
- *
- * @param left_expr  An expression to compare
- * @param right_expr An expression to compare
- */
-#define PICO_ASSERT_EQ(left_expr, right_expr) \
-    PICO_ASSERT((left_expr) == (right_expr))
-
-/**
  * Asserts that the given strings are equal. If the strings are not equal,
  * execution of the current test aborts and an error message is
  * displayed.
@@ -64,8 +53,8 @@
  * @param left_str  A string to compare
  * @param right_str A string to compare
  */
-#define PICO_ASSERT_EQ_STR(p_left_str, p_right_str) \
-    if (!pico_assert_eq_str(p_left_str, p_right_str, __FILE__, __LINE__)) \
+#define PICO_ASSERT_STR_EQ(p_left_str, p_right_str) \
+    if (!pico_assert_str_eq(p_left_str, p_right_str, __FILE__, __LINE__)) \
         return false
 
 /**
@@ -116,7 +105,7 @@ bool pico_assert(bool b_expr,
                  const char* const p_file,
                  int line);
 
-bool pico_assert_eq_str(const char* const p_left_str,
+bool pico_assert_str_eq(const char* const p_left_str,
                         const char* const p_right_str,
                         const char* const p_file,
                         int line);

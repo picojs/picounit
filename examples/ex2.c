@@ -32,8 +32,8 @@ static unsigned g_fix = 0;
 bool test_passing1()
 {
     PICO_ASSERT(true);
-    PICO_ASSERT_EQ(42, 42);
-    PICO_ASSERT_EQ_STR("towel", "towel");
+    PICO_ASSERT(42 == 42);
+    PICO_ASSERT_STR_EQ("towel", "towel");
     return true;
 }
 
@@ -54,7 +54,7 @@ void test_teardown()
 bool test_passing2()
 {
     PICO_ASSERT(42 == g_fix);
-    PICO_ASSERT_EQ_STR("frog", "frog");
+    PICO_ASSERT_STR_EQ("frog", "frog");
     return true;
 }
 
@@ -70,7 +70,7 @@ bool test_failing1()
 // Another test containing a failed assertion.
 bool test_failing2()
 {
-    PICO_ASSERT_EQ_STR("frog", "butterfly"); // Fails here
+    PICO_ASSERT_STR_EQ("frog", "butterfly"); // Fails here
     PICO_ASSERT(true);                       // Never called
     return true;
 }

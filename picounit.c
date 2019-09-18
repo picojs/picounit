@@ -65,7 +65,7 @@ pico_assert (bool b_passed,
 }
 
 bool
-pico_assert_eq_str (const char* const p_left_str,
+pico_assert_str_eq (const char* const p_left_str,
                     const char* const p_right_str,
                     const char* const p_file,
                     int line)

@@ -27,15 +27,6 @@ message is displayed.
 
 - expr - The expression to evaluate
 
-#### PICO_ASSERT_EQ(left_expr, right_expr)
-
-Asserts that the given expressions evaluates are equal. If the expressions
-are not equal, execution of the current test aborts and an error message is
-displayed.
-
-- left_expr  An expression to compare
-- right_expr An expression to compare
-
 #### PICO_ASSERT_STR_EQ(p_left_str, p_right_str)
 
 Asserts that the given strings are equal. If the strings are not equal,
