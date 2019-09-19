@@ -35,8 +35,8 @@ an error message is displayed.
 Asserts that the given strings are equal. If the strings are not equal,
 execution of the current test aborts and an error message is displayed.
 
-- left_str  A string to compare
-- right_str A string to compare
+- p_left_str  A string to compare
+- p_right_str A string to compare
 
 #### PICO_RUN_TEST(p_test)
 
