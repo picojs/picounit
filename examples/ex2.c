@@ -29,7 +29,7 @@
 static unsigned g_fix = 0;
 
 /* All assertions pass in this test. */
-int test_passing1()
+int test_passing1 ()
 {
     PICO_ASSERT(1);
     PICO_ASSERT(42 == 42);
@@ -38,13 +38,13 @@ int test_passing1()
 }
 
 /* Sets up fixture (called before test). */
-void test_setup()
+void test_setup ()
 {
     g_fix = 42;
 }
 
 /* Resets fixture (called after test). */
-void test_teardown()
+void test_teardown ()
 {
     g_fix = 0;
 }
@@ -53,7 +53,7 @@ void test_teardown()
  * All assertions pass in this test. Checks the value of the fixture initialized
  * in the test setup function.
  */
-int test_passing2()
+int test_passing2 ()
 {
     PICO_ASSERT(42 == g_fix);
     PICO_ASSERT_STR_EQ("frog", "frog");
@@ -61,7 +61,7 @@ int test_passing2()
 }
 
 /* Test containing failing assertion. */
-int test_failing1()
+int test_failing1 ()
 {
     PICO_ASSERT(1);
     PICO_ASSERT(24 == 42); /* Fails here */
@@ -70,7 +70,7 @@ int test_failing1()
 }
 
 /* Another test containing a failed assertion. */
-int test_failing2()
+int test_failing2 ()
 {
     PICO_ASSERT_STR_EQ("frog", "butterfly"); /* Fails here */
     PICO_ASSERT(1);                          /* Never called */
@@ -78,7 +78,7 @@ int test_failing2()
 }
 
 /* A test suite containing two passing and one failing test. */
-void test_suite1()
+void test_suite1 ()
 {
     PICO_RUN_TEST(test_passing1);
     PICO_RUN_TEST_ST(test_passing2, test_setup, test_teardown);
@@ -86,7 +86,7 @@ void test_suite1()
 }
 
 /* A test suite containing two passing and one failing test. */
-void test_suite2()
+void test_suite2 ()
 {
     PICO_RUN_TEST(test_passing1);
     PICO_RUN_TEST(test_failing2);

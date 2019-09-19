@@ -29,14 +29,14 @@
 #include <picounit.h>
 
 /*
- * Passing test. Note that the test function declaration returns an integer 
- * value and that the test definition returns true. All test functions must 
+ * Passing test. Note that the test function declaration returns an integer
+ * value and that the test definition returns true. All test functions must
  * return a non-zero value.
  */
 int
 test1 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                /* Simple boolean assertion (ok)  */
+    PICO_ASSERT(2 + 2 == 4);                /* Boolean assertion (ok)         */
     PICO_ASSERT_STR_EQ("apples", "apples"); /* String equality assertion (ok) */
     return 1;
 }
@@ -55,7 +55,7 @@ test2 ()
 int
 test3 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                 /* Simple boolean assertion (ok) */
+    PICO_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok)    */
     PICO_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
                                              /* (fails)                   */
     return 1;
