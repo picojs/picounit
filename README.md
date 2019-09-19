@@ -8,7 +8,7 @@ development.
 Features:
 --------
 
-- Written in pure ANSI C
+- Written in pure ANSI C, but also compatible with C++
 - Only two files (header/source) for easy integration into any build system
 - Tiny memory and code footprint
 - Simple and minimalistic API
