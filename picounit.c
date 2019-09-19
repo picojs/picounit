@@ -28,8 +28,8 @@
 
 #include "picounit.h"
 
-#include <string.h>  // strcmp
-#include <stdio.h>   // prinf
+#include <string.h>  /* strcmp */
+#include <stdio.h>   /* prinf */
 
 #define TERM_COLOR_CODE 0x1B
 #define TERM_COLOR_RED "[1;31m"
@@ -41,8 +41,8 @@ static unsigned g_num_passed  = 0;
 static unsigned g_num_failed  = 0;
 static unsigned g_num_suites = 0;
 
-bool
-pico_assert (bool b_passed,
+int
+pico_assert (int b_passed,
              const char* const p_expr,
              const char* const p_file,
              int line)
@@ -51,7 +51,7 @@ pico_assert (bool b_passed,
 
     if (b_passed)
     {
-        return true;
+        return 1;
     }
     else
     {
@@ -60,11 +60,11 @@ pico_assert (bool b_passed,
                 TERM_COLOR_CODE, TERM_COLOR_RESET,
                 p_file, line, p_expr);
 
-        return false;
+        return 0;
     }
 }
 
-bool
+int
 pico_assert_str_eq (const char* const p_left_str,
                     const char* const p_right_str,
                     const char* const p_file,
@@ -74,7 +74,7 @@ pico_assert_str_eq (const char* const p_left_str,
 
     if (strcmp(p_left_str, p_right_str) == 0)
     {
-        return true;
+        return 1;
     }
     else
     {
@@ -83,7 +83,7 @@ pico_assert_str_eq (const char* const p_left_str,
                 TERM_COLOR_CODE, TERM_COLOR_RESET,
                 p_file, line, p_left_str, p_right_str);
 
-        return false;
+        return 0;
     }
 }
 
@@ -100,7 +100,7 @@ pico_run_test (const char* const p_name,
 
     printf("Running: %s ", p_name);
 
-    if (!p_test())
+    if (0 == p_test())
     {
         g_num_failed++;
     }

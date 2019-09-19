@@ -31,8 +31,7 @@
 #ifndef PICO_UNIT_H
 #define PICO_UNIT_H
 
-#include <stdbool.h> // bool, true, false
-#include <stddef.h>  // NULL
+#include <stddef.h>  /* NULL */
 
 /**
  * Asserts that the given expression evaluates to true. If the expression
@@ -41,9 +40,9 @@
  *
  * @param expr The expression to evaluate
  */
-#define PICO_ASSERT(b_expr) \
-    if (!pico_assert(!!(b_expr), (#b_expr), __FILE__, __LINE__)) \
-        return false
+#define PICO_ASSERT(expr) \
+    if (!pico_assert((expr) ? 1 : 0, (#expr), __FILE__, __LINE__)) \
+        return 0
 
 /**
  * Asserts that the given strings are equal. If the strings are not equal,
@@ -55,7 +54,7 @@
  */
 #define PICO_ASSERT_STR_EQ(p_left_str, p_right_str) \
     if (!pico_assert_str_eq(p_left_str, p_right_str, __FILE__, __LINE__)) \
-        return false
+        return 0
 
 /**
  * Runs a unit test function. IMPORTANT: The function `p_test` must
@@ -95,20 +94,20 @@ extern "C" {
 /*
  * NOTE: These declarations are used internally and should not be used directly.
  */
-typedef bool (*pico_test_t)(void);
+typedef int  (*pico_test_t)(void);
 typedef void (*pico_setup_t)(void);
 typedef void (*pico_teardown_t)(void);
 typedef void (*pico_suite_t)(void);
 
-bool pico_assert(bool b_expr,
-                 const char* const p_expr,
-                 const char* const p_file,
-                 int line);
+int pico_assert(int b_expr,
+                const char* const p_expr,
+                const char* const p_file,
+                int line);
 
-bool pico_assert_str_eq(const char* const p_left_str,
-                        const char* const p_right_str,
-                        const char* const p_file,
-                        int line);
+int pico_assert_str_eq(const char* const p_left_str,
+                       const char* const p_right_str,
+                       const char* const p_file,
+                       int line);
 
 void pico_run_test(const char* const p_name,
                    pico_test_t p_test,
@@ -124,6 +123,6 @@ void pico_print_stats();
 }
 #endif
 
-#endif // PICO_UNIT_H
+#endif /* PICO_UNIT_H */
 
 /* EoF */
