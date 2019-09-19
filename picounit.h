@@ -1,5 +1,5 @@
 /** \file picounit.h
- * PicoUnit is a minimal, yet powerful unit testing framework written in C99.
+ * PicoUnit is a minimal, yet powerful unit testing framework written in ANSI C.
  * Due to its small footprint, PicoUnit is suitable for embedded as well as
  * general development.
  */

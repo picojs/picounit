@@ -1,7 +1,7 @@
 PicoUnit
 ========
 
-PicoUnit is a minimal, yet powerful unit testing framework written in C99.
+PicoUnit is a minimal, yet powerful unit testing framework written in ANSI C.
 Due to its small footprint, PicoUnit is suitable for embedded as well as general
 development.
 
@@ -66,39 +66,40 @@ Example:
 ```C
 #include <picounit.h>
 
-// Passing test. Note that the test function declaration returns a boolean value
-// and that the test definition returns true. All test functions must return
-// true.
-bool
+/*
+ * Passing test. Note that the test function declaration returns an integer
+ * value and that the test definition returns true. All test functions must
+ * return a non-zero value.
+ */
+int
 test1 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                // Simple boolean assertion (ok)
-    PICO_ASSERT_EQ(2 + 2, 4);               // Equivalent to the above (ok)
-    PICO_ASSERT_EQ_STR("apples", "apples"); // String equality assertion (ok)
-    return true;
+    PICO_ASSERT(2 + 2 == 4);                /* Simple boolean assertion (ok)  */
+    PICO_ASSERT_STR_EQ("apples", "apples"); /* String equality assertion (ok) */
+    return 1;
 }
 
-// Failing test.
-bool
+/* Failing test */
+int
 test2 ()
 {
-    PICO_ASSERT(1 == 0);                     // Simple boolean assertion (fails)
-    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion
-                                             // (fails but never called)
-    return true;
+    PICO_ASSERT(2 + 2 != 4);                 /* Boolean assertion (fails) */
+    PICO_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
+                                             /* (fails but never called)  */
+    return 1;
 }
 
-// Mixed results.
-bool
+/* Mixed results */
+int
 test3 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                 // Simple boolean assertion (ok)
-    PICO_ASSERT_EQ_STR("apples", "oranges"); // String equality assertion
-                                             // (fails)
-    return true;
+    PICO_ASSERT(2 + 2 == 4);                 /* Simple boolean assertion (ok) */
+    PICO_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
+                                             /* (fails)                   */
+    return 1;
 }
 
-// Test suite container function (multiple test suites can be specified).
+/* Test suite container function (multiple test suits can be specified. */
 void
 test_suite()
 {
@@ -107,12 +108,11 @@ test_suite()
     PICO_RUN_TEST(test3);
 }
 
-// Run all test suites and print test statistics.
 int
 main (int argc, char* argv[])
 {
     PICO_RUN_SUITE(test_suite);
-    PICO_PRINT_STATS();
+    PICO_PRINT_STATS(); /* Optional */
     return 0;
 }
 ```
