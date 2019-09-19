@@ -34,8 +34,8 @@
 #include <stddef.h>  /* NULL */
 
 /**
- * Asserts that the given expression evaluates to `true` (non-zero). If the 
- * expression evalutes to `false` (zero), execution of the current test aborts 
+ * Asserts that the given expression evaluates to `true` (non-zero). If the
+ * expression evalutes to `false` (zero), execution of the current test aborts
  * and an error message is displayed.
  *
  * @param expr The expression to evaluate
@@ -66,7 +66,7 @@
 
 /**
  * Runs a unit test function with setup and teardown functions. Either one of
-* `p_setup` or `p_teardown` can be `NULL`.
+ * `p_setup` or `p_teardown` can be `NULL`.
  *
  * @param p_test     The test function to execute
  * @param p_setup    Setup function that is run before the test function
