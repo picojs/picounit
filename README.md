@@ -8,22 +8,25 @@ development.
 Features:
 --------
 
+- Written in pure ANSI C
 - Only two files (header/source) for easy integration into any build system
 - Tiny memory and code footprint
+- Simple and minimalistic API
 - All unit tests are run during execution and failures indicated
+- Test setup and teardown function support
 - Ability to group tests into test suites
 - Ability to print test statistics
-- Test setup and teardown function support
-- Simple and minimalistic API
+- Color coded output
+
 
 API:
 --------
 
 #### PICO_ASSERT(expr)
 
-Asserts that the given expression evaluates to `true`. If the expression
-evalutes to `false,` execution of the current test aborts and an error
-message is displayed.
+Asserts that the given expression evaluates to `true` (non-zero). If the
+expression evalutes to `false` (zero), execution of the current test aborts and
+an error message is displayed.
 
 - expr - The expression to evaluate
 
@@ -38,13 +41,14 @@ execution of the current test aborts and an error message is displayed.
 #### PICO_RUN_TEST(p_test)
 
 Runs a unit test function. **IMPORTANT**: The function `p_test` must
-return `true`.
+return `true` (non-zero).
 
 - p_test The test function to execute
 
 #### PICO_RUN_TEST_ST(p_test, p_setup, p_teardown)
 
-Runs a unit test function with setup and teardown functions.
+Runs a unit test function with setup and teardown functions. Either one of
+`p_setup` or `p_teardown` can be `NULL`.
 
 - p_test The test function to execute
 - p_setup Setup function that is run before the test function

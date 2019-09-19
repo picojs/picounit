@@ -34,9 +34,9 @@
 #include <stddef.h>  /* NULL */
 
 /**
- * Asserts that the given expression evaluates to true. If the expression
- * evalutes to false, execution of the current test aborts and an error
- * message is displayed.
+ * Asserts that the given expression evaluates to `true` (non-zero). If the 
+ * expression evalutes to `false` (zero), execution of the current test aborts 
+ * and an error message is displayed.
  *
  * @param expr The expression to evaluate
  */
@@ -46,11 +46,10 @@
 
 /**
  * Asserts that the given strings are equal. If the strings are not equal,
- * execution of the current test aborts and an error message is
- * displayed.
+ * execution of the current test aborts and an error message is displayed.
  *
- * @param left_str  A string to compare
- * @param right_str A string to compare
+ * @param p_left_str  A string to compare
+ * @param p_right_str A string to compare
  */
 #define PICO_ASSERT_STR_EQ(p_left_str, p_right_str) \
     if (!pico_assert_str_eq(p_left_str, p_right_str, __FILE__, __LINE__)) \
@@ -58,7 +57,7 @@
 
 /**
  * Runs a unit test function. IMPORTANT: The function `p_test` must
- * return `true`.
+ * return `true` (non-zero).
  *
  * @param p_test The test function to execute
  */
@@ -66,7 +65,8 @@
     pico_run_test(#p_test, p_test, NULL, NULL)
 
 /**
- * Runs a unit test function with setup and teardown functions.
+ * Runs a unit test function with setup and teardown functions. Either one of
+* `p_setup` or `p_teardown` can be `NULL`.
  *
  * @param p_test     The test function to execute
  * @param p_setup    Setup function that is run before the test function
