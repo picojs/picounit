@@ -37,7 +37,7 @@ int test_passing1 ()
     return 1;
 }
 
-/* Sets up fixture (called before test). */
+/* Sets up fixture for (called before test). */
 void test_setup ()
 {
     g_fix = 42;

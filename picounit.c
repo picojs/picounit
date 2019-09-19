@@ -72,7 +72,7 @@ pico_assert_str_eq (const char* const p_left_str,
 {
     g_num_asserts++;
 
-    if (strcmp(p_left_str, p_right_str) == 0)
+    if (0 == strcmp(p_left_str, p_right_str))
     {
         return 1;
     }
@@ -100,7 +100,7 @@ pico_run_test (const char* const p_name,
 
     printf("Running: %s ", p_name);
 
-    if (0 == p_test())
+    if (!p_test())
     {
         g_num_failed++;
     }

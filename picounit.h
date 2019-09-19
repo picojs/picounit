@@ -83,7 +83,7 @@
 #define PICO_RUN_SUITE(p_suite) pico_run_suite(#p_suite, p_suite)
 
 /**
- * Print test statistics.
+ * Prints test statistics.
  */
 #define PICO_PRINT_STATS() pico_print_stats()
 

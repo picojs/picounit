@@ -12,8 +12,8 @@ Features:
 - Only two files (header/source) for easy integration into any build system
 - Tiny memory and code footprint
 - Simple and minimalistic API
-- All unit tests are run during execution and failures indicated
-- Test setup and teardown function support
+- All unit tests are run during execution and failures are indicated
+- Optional setup and teardown function support
 - Ability to group tests into test suites
 - Ability to print test statistics
 - Color coded output
@@ -59,6 +59,10 @@ Runs a unit test function with setup and teardown functions. Either one of
 Runs a series of unit tests.
 
 - p_suite The test suite function to run
+
+#### PICO_PRINT_STATS()
+
+Prints test statistics.
 
 Example:
 --------

@@ -30,8 +30,8 @@
 
 /*
  * Passing test. Note that the test function declaration returns an integer
- * value and that the test definition returns true. All test functions must
- * return a non-zero value.
+ * value and that the test definition returns an integer. All test functions
+ * must return a non-zero value.
  */
 int
 test1 ()
