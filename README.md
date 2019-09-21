@@ -72,7 +72,7 @@ Example:
 
 /*
  * Passing test. Note that the test function declaration returns an integer
- * value and that the test definition returns true. All test functions must
+ * value and that the test definition returns `1`. All test functions must
  * return a non-zero value.
  */
 int
