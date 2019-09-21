@@ -17,7 +17,7 @@ Features:
 - Ability to group tests into test suites
 - Ability to print test statistics
 - Color coded output
-
+- MIT licensed
 
 API:
 --------
