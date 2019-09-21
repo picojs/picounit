@@ -35,7 +35,7 @@ an error message is displayed.
 Asserts that the given strings are equal. If the strings are not equal,
 execution of the current test aborts and an error message is displayed.
 
-- `p_left_str`  - A string to compare
+- `p_left_str` - A string to compare
 - `p_right_str` - A string to compare
 
 #### PICO_RUN_TEST(p_test)
@@ -50,8 +50,8 @@ return `true` (non-zero).
 Runs a unit test function with setup and teardown functions. Either one of
 `p_setup` or `p_teardown` can be `NULL`.
 
-- `p_test`     - The test function to execute
-- `p_setup`    - Setup function that is run before the test function
+- `p_test` - The test function to execute
+- `p_setup` - Setup function that is run before the test function
 - `p_teardown` - Teardown function that is run after the test function
 
 #### PICO_RUN_SUITE(p_suite)
