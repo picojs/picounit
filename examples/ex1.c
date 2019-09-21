@@ -30,7 +30,7 @@
 
 /*
  * Passing test. Note that the test function declaration returns an integer
- * value and that the test definition returns an integer. All test functions
+ * value and that the test definition returns 1. All test functions
  * must return a non-zero value.
  */
 int
