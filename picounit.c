@@ -72,12 +72,8 @@ pico_assert_str_eq (const char* const p_left_str,
 {
     g_num_asserts++;
 
-    if ((NULL == p_left_str) || (NULL == p_right_str))
-    {
-        return 0;
-    }
-
-    if (0 == strcmp(p_left_str, p_right_str))
+    if ((NULL != p_left_str) && (NULL != p_right_str) &&
+        (0 == strcmp(p_left_str, p_right_str)))
     {
         return 1;
     }
