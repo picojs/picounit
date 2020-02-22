@@ -36,8 +36,8 @@
 int
 test1 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                /* Boolean assertion (ok)         */
-    PICO_ASSERT_STR_EQ("apples", "apples"); /* String equality assertion (ok) */
+    PICOU_ASSERT(2 + 2 == 4);                /* Boolean assertion (ok)         */
+    PICOU_ASSERT_STR_EQ("apples", "apples"); /* String equality assertion (ok) */
     return 1;
 }
 
@@ -45,8 +45,8 @@ test1 ()
 int
 test2 ()
 {
-    PICO_ASSERT(2 + 2 != 4);                 /* Boolean assertion (fails) */
-    PICO_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
+    PICOU_ASSERT(2 + 2 != 4);                 /* Boolean assertion (fails) */
+    PICOU_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
                                              /* (fails but never called)  */
     return 1;
 }
@@ -55,8 +55,8 @@ test2 ()
 int
 test3 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok)    */
-    PICO_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
+    PICOU_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok)    */
+    PICOU_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
                                              /* (fails)                   */
     return 1;
 }
@@ -65,15 +65,15 @@ test3 ()
 void
 test_suite()
 {
-    PICO_RUN_TEST(test1);
-    PICO_RUN_TEST(test2);
-    PICO_RUN_TEST(test3);
+    PICOU_RUN_TEST(test1);
+    PICOU_RUN_TEST(test2);
+    PICOU_RUN_TEST(test3);
 }
 
 int
 main (int argc, char* argv[])
 {
-    PICO_RUN_SUITE(test_suite);
-    PICO_PRINT_STATS(); /* Optional */
+    PICOU_RUN_SUITE(test_suite);
+    PICOU_PRINT_STATS(); /* Optional */
     return 0;
 }

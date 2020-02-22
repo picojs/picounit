@@ -42,7 +42,7 @@ static unsigned g_num_failed  = 0;
 static unsigned g_num_suites  = 0;
 
 int
-pico_assert (int b_passed,
+picounit_assert (int b_passed,
              const char* const p_expr,
              const char* const p_file,
              int line)
@@ -65,7 +65,7 @@ pico_assert (int b_passed,
 }
 
 int
-pico_assert_str_eq (const char* const p_left_str,
+picounit_assert_str_eq (const char* const p_left_str,
                     const char* const p_right_str,
                     const char* const p_file,
                     int line)
@@ -89,10 +89,10 @@ pico_assert_str_eq (const char* const p_left_str,
 }
 
 void
-pico_run_test (const char* const p_name,
-               pico_test_t p_test,
-               pico_setup_t p_setup,
-               pico_teardown_t p_teardown)
+picounit_run_test (const char* const p_name,
+               picounit_test_t p_test,
+               picounit_setup_t p_setup,
+               picounit_teardown_t p_teardown)
 {
     if (NULL != p_setup)
     {
@@ -120,7 +120,7 @@ pico_run_test (const char* const p_name,
 }
 
 void
-pico_run_suite (const char* const p_name, pico_suite_t p_suite)
+picounit_run_suite (const char* const p_name, picounit_suite_t p_suite)
 {
     printf("===============================================================\n");
     printf("Running: %s\n", p_name);
@@ -130,7 +130,7 @@ pico_run_suite (const char* const p_name, pico_suite_t p_suite)
 }
 
 void
-pico_print_stats()
+picounit_print_stats()
 {
     printf("===============================================================\n");
     printf("Summary: Passed: %u, Failed: %u, Total: %u, Suites: %u, Asserts: %u\n",
