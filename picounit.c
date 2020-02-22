@@ -31,15 +31,15 @@
 #include <string.h>  /* strcmp */
 #include <stdio.h>   /* prinf */
 
-#define TERM_COLOR_CODE 0x1B
-#define TERM_COLOR_RED "[1;31m"
+#define TERM_COLOR_CODE   0x1B
+#define TERM_COLOR_RED   "[1;31m"
 #define TERM_COLOR_GREEN "[1;32m"
 #define TERM_COLOR_RESET "[0m"
 
 static unsigned g_num_asserts = 0;
 static unsigned g_num_passed  = 0;
 static unsigned g_num_failed  = 0;
-static unsigned g_num_suites = 0;
+static unsigned g_num_suites  = 0;
 
 int
 pico_assert (int b_passed,
@@ -134,7 +134,7 @@ pico_print_stats()
 {
     printf("===============================================================\n");
     printf("Summary: Passed: %u, Failed: %u, Total: %u, Suites: %u, Asserts: %u\n",
-            g_num_passed,  g_num_failed, g_num_passed + g_num_failed, 
+            g_num_passed,  g_num_failed, g_num_passed + g_num_failed,
             g_num_suites, g_num_asserts);
 }
 
