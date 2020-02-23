@@ -40,8 +40,8 @@
  *
  * @param expr The expression to evaluate
  */
-#define PICOU_ASSERT(expr) \
-    if (!picounit_assert((expr) ? 1 : 0, (#expr), __FILE__, __LINE__)) \
+#define PUNIT_ASSERT(expr) \
+    if (!punit_assert((expr) ? 1 : 0, (#expr), __FILE__, __LINE__)) \
         return 0
 
 /**
@@ -51,8 +51,8 @@
  * @param p_left_str  A string to compare
  * @param p_right_str A string to compare
  */
-#define PICOU_ASSERT_STR_EQ(p_left_str, p_right_str) \
-    if (!picounit_assert_str_eq(p_left_str, p_right_str, __FILE__, __LINE__)) \
+#define PUNIT_ASSERT_STR_EQ(p_left_str, p_right_str) \
+    if (!punit_assert_str_eq(p_left_str, p_right_str, __FILE__, __LINE__)) \
         return 0
 
 /**
@@ -61,8 +61,8 @@
  *
  * @param p_test The test function to execute
  */
-#define PICOU_RUN_TEST(p_test) \
-    picounit_run_test(#p_test, p_test, NULL, NULL)
+#define PUNIT_RUN_TEST(p_test) \
+    punit_run_test(#p_test, p_test, NULL, NULL)
 
 /**
  * Runs a unit test function with setup and teardown functions. Either one of
@@ -72,20 +72,20 @@
  * @param p_setup    Setup function that is run before the test function
  * @param p_teardown Teardown function that is run after the test function
  */
-#define PICOU_RUN_TEST_ST(p_test, p_setup, p_teardown) \
-    picounit_run_test(#p_test, p_test, p_setup, p_teardown)
+#define PUNIT_RUN_TEST_ST(p_test, p_setup, p_teardown) \
+    punit_run_test(#p_test, p_test, p_setup, p_teardown)
 
 /**
  * Runs a series of unit tests.
  *
  * @param p_suite The test suite function to run
  */
-#define PICOU_RUN_SUITE(p_suite) picounit_run_suite(#p_suite, p_suite)
+#define PUNIT_RUN_SUITE(p_suite) punit_run_suite(#p_suite, p_suite)
 
 /**
  * Prints test statistics.
  */
-#define PICOU_PRINT_STATS() picounit_print_stats()
+#define PUNIT_PRINT_STATS() punit_print_stats()
 
 #ifdef __cplusplus
 extern "C" {
@@ -94,30 +94,30 @@ extern "C" {
 /*
  * NOTE: These declarations are used internally and should not be used directly.
  */
-typedef int  (*picounit_test_t)(void);
-typedef void (*picounit_setup_t)(void);
-typedef void (*picounit_teardown_t)(void);
-typedef void (*picounit_suite_t)(void);
+typedef int  (*punit_test_t)(void);
+typedef void (*punit_setup_t)(void);
+typedef void (*punit_teardown_t)(void);
+typedef void (*punit_suite_t)(void);
 
-int picounit_assert(int b_expr,
+int punit_assert(int b_expr,
                 const char* const p_expr,
                 const char* const p_file,
                 int line);
 
-int picounit_assert_str_eq(const char* const p_left_str,
+int punit_assert_str_eq(const char* const p_left_str,
                        const char* const p_right_str,
                        const char* const p_file,
                        int line);
 
-void picounit_run_test(const char* const p_name,
-                   picounit_test_t p_test,
-                   picounit_setup_t p_setup,
-                   picounit_teardown_t p_teardown);
+void punit_run_test(const char* const p_name,
+                   punit_test_t p_test,
+                   punit_setup_t p_setup,
+                   punit_teardown_t p_teardown);
 
-void picounit_run_suite(const char* const p_name,
-                    picounit_suite_t p_suite);
+void punit_run_suite(const char* const p_name,
+                    punit_suite_t p_suite);
 
-void picounit_print_stats();
+void punit_print_stats();
 
 #ifdef __cplusplus
 }

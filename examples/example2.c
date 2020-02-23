@@ -31,9 +31,9 @@ static unsigned g_fix = 0;
 /* All assertions pass in this test. */
 int test_passing1 ()
 {
-    PICOU_ASSERT(1);
-    PICOU_ASSERT(42 == 42);
-    PICOU_ASSERT_STR_EQ("towel", "towel");
+    PUNIT_ASSERT(1);
+    PUNIT_ASSERT(42 == 42);
+    PUNIT_ASSERT_STR_EQ("towel", "towel");
     return 1;
 }
 
@@ -55,49 +55,49 @@ void test_teardown ()
  */
 int test_passing2 ()
 {
-    PICOU_ASSERT(42 == g_fix);
-    PICOU_ASSERT_STR_EQ("frog", "frog");
+    PUNIT_ASSERT(42 == g_fix);
+    PUNIT_ASSERT_STR_EQ("frog", "frog");
     return 1;
 }
 
 /* Test containing failing assertion. */
 int test_failing1 ()
 {
-    PICOU_ASSERT(1);
-    PICOU_ASSERT(24 == 42); /* Fails here */
-    PICOU_ASSERT(1);        /* Never called */
+    PUNIT_ASSERT(1);
+    PUNIT_ASSERT(24 == 42); /* Fails here */
+    PUNIT_ASSERT(1);        /* Never called */
     return 1;
 }
 
 /* Another test containing a failed assertion. */
 int test_failing2 ()
 {
-    PICOU_ASSERT_STR_EQ("frog", "butterfly"); /* Fails here */
-    PICOU_ASSERT(1);                          /* Never called */
+    PUNIT_ASSERT_STR_EQ("frog", "butterfly"); /* Fails here */
+    PUNIT_ASSERT(1);                          /* Never called */
     return 1;
 }
 
 /* A test suite containing two passing and one failing test. */
 void test_suite1 ()
 {
-    PICOU_RUN_TEST(test_passing1);
-    PICOU_RUN_TEST_ST(test_passing2, test_setup, test_teardown);
-    PICOU_RUN_TEST(test_failing1);
+    PUNIT_RUN_TEST(test_passing1);
+    PUNIT_RUN_TEST_ST(test_passing2, test_setup, test_teardown);
+    PUNIT_RUN_TEST(test_failing1);
 }
 
 /* A test suite containing two passing and one failing test. */
 void test_suite2 ()
 {
-    PICOU_RUN_TEST(test_passing1);
-    PICOU_RUN_TEST(test_failing2);
-    PICOU_RUN_TEST(test_passing1);
+    PUNIT_RUN_TEST(test_passing1);
+    PUNIT_RUN_TEST(test_failing2);
+    PUNIT_RUN_TEST(test_passing1);
 }
 
 /* Run all test suites and print test statistics. */
 int main (int argc, char** argv)
 {
-    PICOU_RUN_SUITE(test_suite1);
-    PICOU_RUN_SUITE(test_suite2);
-    PICOU_PRINT_STATS();
+    PUNIT_RUN_SUITE(test_suite1);
+    PUNIT_RUN_SUITE(test_suite2);
+    PUNIT_PRINT_STATS();
     return 0;
 }
