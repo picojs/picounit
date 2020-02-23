@@ -74,6 +74,6 @@ int
 main (int argc, char* argv[])
 {
     PUNIT_RUN_SUITE(test_suite);
-    PUNIT_PRINT_STATS(); /* Optional */
+    punit_print_stats(); /* Optional */
     return 0;
 }

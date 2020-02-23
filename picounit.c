@@ -36,10 +36,23 @@
 #define TERM_COLOR_GREEN "[1;32m"
 #define TERM_COLOR_RESET "[0m"
 
-static unsigned g_num_asserts = 0;
-static unsigned g_num_passed  = 0;
-static unsigned g_num_failed  = 0;
-static unsigned g_num_suites  = 0;
+static unsigned g_num_asserts  = 0;
+static unsigned g_num_passed   = 0;
+static unsigned g_num_failed   = 0;
+static unsigned g_num_suites   = 0;
+static unsigned gb_term_colors = 0;
+
+void
+punit_colors_on ()
+{
+    gb_term_colors = 1;
+}
+
+void
+punit_colors_off ()
+{
+    gb_term_colors = 0;
+}
 
 int
 punit_assert (int b_passed,
@@ -55,10 +68,17 @@ punit_assert (int b_passed,
     }
     else
     {
-        printf("(%c%sFAILED%c%s: %s (%d): %s)\n",
-                TERM_COLOR_CODE, TERM_COLOR_RED,
-                TERM_COLOR_CODE, TERM_COLOR_RESET,
-                p_file, line, p_expr);
+        if (gb_term_colors)
+        {
+            printf("(%c%sFAILED%c%s: %s (%d): %s)\n",
+                   TERM_COLOR_CODE, TERM_COLOR_RED,
+                   TERM_COLOR_CODE, TERM_COLOR_RESET,
+                   p_file, line, p_expr);
+        }
+        else
+        {
+            printf("(FAILED: %s (%d): %s)\n", p_file, line, p_expr);
+        }
 
         return 0;
     }
@@ -79,10 +99,18 @@ punit_assert_str_eq (const char* const p_left_str,
     }
     else
     {
-        printf("(%c%sFAILED%c%s: %s (%d): \"%s\" == \"%s\")\n",
-                TERM_COLOR_CODE, TERM_COLOR_RED,
-                TERM_COLOR_CODE, TERM_COLOR_RESET,
-                p_file, line, p_left_str, p_right_str);
+        if (gb_term_colors)
+        {
+            printf("(%c%sFAILED%c%s: %s (%d): \"%s\" == \"%s\")\n",
+                   TERM_COLOR_CODE, TERM_COLOR_RED,
+                   TERM_COLOR_CODE, TERM_COLOR_RESET,
+                   p_file, line, p_left_str, p_right_str);
+        }
+        else
+        {
+            printf("(FAILED: %s (%d): \"%s\" == \"%s\")\n",
+                   p_file, line, p_left_str, p_right_str);
+        }
 
         return 0;
     }
@@ -107,8 +135,16 @@ punit_run_test (const char* const p_name,
     }
     else
     {
-        printf("(%c%sOK%c%s)\n", TERM_COLOR_CODE, TERM_COLOR_GREEN,
-                                 TERM_COLOR_CODE, TERM_COLOR_RESET);
+        if (gb_term_colors)
+        {
+            printf("(%c%sOK%c%s)\n", TERM_COLOR_CODE, TERM_COLOR_GREEN,
+                                     TERM_COLOR_CODE, TERM_COLOR_RESET);
+        }
+        else
+        {
+            printf("(OK)\n");
+        }
+
 
         g_num_passed++;
     }

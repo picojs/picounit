@@ -96,8 +96,9 @@ void test_suite2 ()
 /* Run all test suites and print test statistics. */
 int main (int argc, char** argv)
 {
+    punit_colors_on();
     PUNIT_RUN_SUITE(test_suite1);
     PUNIT_RUN_SUITE(test_suite2);
-    PUNIT_PRINT_STATS();
+    punit_print_stats();
     return 0;
 }

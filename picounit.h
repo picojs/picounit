@@ -82,14 +82,24 @@
  */
 #define PUNIT_RUN_SUITE(p_suite) punit_run_suite(#p_suite, p_suite)
 
-/**
- * Prints test statistics.
- */
-#define PUNIT_PRINT_STATS() punit_print_stats()
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * Turns on terminal colors.
+ */
+void punit_colors_on();
+
+/**
+ * Turns off terminal colors.
+ */
+void punit_colors_off();
+
+/**
+ * Prints test statistics.
+ */
+void punit_print_stats();
 
 /*
  * NOTE: These declarations are used internally and should not be used directly.
@@ -116,8 +126,6 @@ void punit_run_test(const char* const p_name,
 
 void punit_run_suite(const char* const p_name,
                     punit_suite_t p_suite);
-
-void punit_print_stats();
 
 #ifdef __cplusplus
 }
