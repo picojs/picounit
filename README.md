@@ -1,8 +1,8 @@
-PicoUnit
+picounit
 ========
 
-PicoUnit is a minimal, yet powerful unit testing framework written in ANSI C.
-Due to its small footprint, PicoUnit is suitable for embedded as well as general
+*picounit* is a minimal, yet powerful unit testing framework written in ANSI C.
+Due to its small footprint, it is suitable for embedded as well as general
 development.
 
 Features:
@@ -16,13 +16,13 @@ Features:
 - Optional setup and teardown function support
 - Ability to group tests into test suites
 - Ability to print test statistics
-- Color coded output
+- Optional color coded output
 - MIT licensed
 
 API:
 --------
 
-#### PICO_ASSERT(expr)
+#### PUNIT_ASSERT(expr)
 
 Asserts that the given expression evaluates to `true` (non-zero). If the
 expression evalutes to `false` (zero), execution of the current test aborts and
@@ -30,7 +30,7 @@ an error message is displayed.
 
 - `expr` - The expression to evaluate
 
-#### PICO_ASSERT_STR_EQ(p_left_str, p_right_str)
+#### PUNIT_ASSERT_STR_EQ(p_left_str, p_right_str)
 
 Asserts that the given strings are equal. If the strings are not equal,
 execution of the current test aborts and an error message is displayed.
@@ -38,14 +38,14 @@ execution of the current test aborts and an error message is displayed.
 - `p_left_str` - A string to compare
 - `p_right_str` - A string to compare
 
-#### PICO_RUN_TEST(p_test)
+#### PUNIT_RUN_TEST(p_test)
 
 Runs a unit test function. **IMPORTANT**: The function `p_test` must
 return `true` (non-zero).
 
 - `p_test` - The test function to execute
 
-#### PICO_RUN_TEST_ST(p_test, p_setup, p_teardown)
+#### PUNIT_RUN_TEST_ST(p_test, p_setup, p_teardown)
 
 Runs a unit test function with setup and teardown functions. Either one of
 `p_setup` or `p_teardown` can be `NULL`.
@@ -54,13 +54,21 @@ Runs a unit test function with setup and teardown functions. Either one of
 - `p_setup` - Setup function that is run before the test function
 - `p_teardown` - Teardown function that is run after the test function
 
-#### PICO_RUN_SUITE(p_suite)
+#### PUNIT_RUN_SUITE(p_suite)
 
 Runs a series of unit tests.
 
 - `p_suite` - The test suite function to run
 
-#### PICO_PRINT_STATS()
+#### punit_colors_on()
+
+Turns terminal colors on.
+
+#### punit_colors_off()
+
+Turns terminal colors off.
+
+#### punit_print_stats()
 
 Prints test statistics.
 
@@ -78,45 +86,45 @@ Example:
 int
 test1 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                /* Simple boolean assertion (ok)  */
-    PICO_ASSERT_STR_EQ("apples", "apples"); /* String equality assertion (ok) */
+    PUNIT_ASSERT(2 + 2 == 4);                /* Simple boolean assertion (ok)  */
+    PUNIT_ASSERT_STR_EQ("apples", "apples"); /* String equality assertion (ok) */
     return 1;
 }
 
-/* Failing test */
+/* Failing test. */
 int
 test2 ()
 {
-    PICO_ASSERT(2 + 2 != 4);                 /* Boolean assertion (fails) */
-    PICO_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
+    PUNIT_ASSERT(2 + 2 != 4);                 /* Boolean assertion (fails) */
+    PUNIT_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
                                              /* (fails but never called)  */
     return 1;
 }
 
-/* Mixed results */
+/* Mixed results. */
 int
 test3 ()
 {
-    PICO_ASSERT(2 + 2 == 4);                 /* Simple boolean assertion (ok) */
-    PICO_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
+    PUNIT_ASSERT(2 + 2 == 4);                 /* Simple boolean assertion (ok) */
+    PUNIT_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
                                              /* (fails)                   */
     return 1;
 }
 
-/* Test suite container function (multiple test suits can be specified. */
+/* Test suite container function (multiple test suits can be specified). */
 void
 test_suite()
 {
-    PICO_RUN_TEST(test1);
-    PICO_RUN_TEST(test2);
-    PICO_RUN_TEST(test3);
+    PUNIT_RUN_TEST(test1);
+    PUNIT_RUN_TEST(test2);
+    PUNIT_RUN_TEST(test3);
 }
 
 int
 main (int argc, char* argv[])
 {
-    PICO_RUN_SUITE(test_suite);
-    PICO_PRINT_STATS(); /* Optional */
+    PUNIT_RUN_SUITE(test_suite);
+    punit_print_stats(); /* Optional */
     return 0;
 }
 ```

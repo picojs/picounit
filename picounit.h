@@ -1,7 +1,7 @@
 /** @file picounit.h
- * PicoUnit is a minimal, yet powerful unit testing framework written in ANSI C.
- * Due to its small footprint, PicoUnit is suitable for embedded as well as
- * general development.
+ * picounit is a minimal, yet powerful unit testing framework written in ANSI C.
+ * Due to its small footprint, it is suitable for embedded as well as general
+ * development.
  */
 
 /*=============================================================================

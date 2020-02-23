@@ -40,18 +40,18 @@ static unsigned g_num_asserts  = 0;
 static unsigned g_num_passed   = 0;
 static unsigned g_num_failed   = 0;
 static unsigned g_num_suites   = 0;
-static unsigned gb_term_colors = 0;
+static unsigned gb_colors      = 0;
 
 void
 punit_colors_on ()
 {
-    gb_term_colors = 1;
+    gb_colors = 1;
 }
 
 void
 punit_colors_off ()
 {
-    gb_term_colors = 0;
+    gb_colors = 0;
 }
 
 int
@@ -68,7 +68,7 @@ punit_assert (int b_passed,
     }
     else
     {
-        if (gb_term_colors)
+        if (gb_colors)
         {
             printf("(%c%sFAILED%c%s: %s (%d): %s)\n",
                    TERM_COLOR_CODE, TERM_COLOR_RED,
@@ -99,7 +99,7 @@ punit_assert_str_eq (const char* const p_left_str,
     }
     else
     {
-        if (gb_term_colors)
+        if (gb_colors)
         {
             printf("(%c%sFAILED%c%s: %s (%d): \"%s\" == \"%s\")\n",
                    TERM_COLOR_CODE, TERM_COLOR_RED,
@@ -135,7 +135,7 @@ punit_run_test (const char* const p_name,
     }
     else
     {
-        if (gb_term_colors)
+        if (gb_colors)
         {
             printf("(%c%sOK%c%s)\n", TERM_COLOR_CODE, TERM_COLOR_GREEN,
                                      TERM_COLOR_CODE, TERM_COLOR_RESET);
