@@ -130,5 +130,5 @@ main (int argc, char* argv[])
 ```
 
 ## License
-Copyright (c) 2020 James McLean
-Licensed under the MIT license
+Copyright (c) 2020 James McLean.
+Licensed under the MIT license.

@@ -1,13 +1,13 @@
 /** @file picounit.h
  * picounit is a minimal, yet powerful unit testing framework written in ANSI C.
  * Due to its small footprint, it is suitable for embedded as well as general
- * development.
+ * software development.
  */
 
 /*=============================================================================
  * MIT License
  *
- * Copyright (c) 2019 James McLean
+ * Copyright (c) 2020 James McLean
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -102,8 +102,10 @@ void punit_colors_off();
 void punit_print_stats();
 
 /*
- * NOTE: These declarations are used internally and should not be used directly.
+ * NOTE: It is inadvisable to call these functions directly. Use the macros
+ * instead.
  */
+
 typedef int  (*punit_test_t)(void);
 typedef void (*punit_setup_t)(void);
 typedef void (*punit_teardown_t)(void);
