@@ -87,7 +87,7 @@ extern "C" {
 #endif
 
 /**
- * Turns on terminal colors.
+ * Turns on terminal colors. NOTE: Off by default.
  */
 void punit_colors_on();
 
