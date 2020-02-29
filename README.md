@@ -126,7 +126,18 @@ main (int argc, char* argv[])
     return 0;
 }
 ```
+Output:
+--------
+
+> ===============================================================<br/>
+> Running: test_suite<br/>
+> ---------------------------------------------------------------<br/>
+> Running: test1 (OK)<br/>
+> Running: test2 (FAILED: example1.c (48): 2 + 2 != 4)<br/>
+> Running: test3 (FAILED: example1.c (59): "apples" == "oranges")<br/>
+> ===============================================================<br/>
+> Summary: Passed: 1, Failed: 2, Total: 3, Suites: 1, Asserts: 5
 
 ## License
-Copyright (c) 2020 James McLean.
+Copyright (c) 2020 James McLean.<br/>
 Licensed under the MIT license.
