@@ -1,7 +1,5 @@
 /** @file picounit.h
  * picounit is a minimal, yet powerful unit testing framework written in ANSI C.
- * Due to its small footprint, it is suitable for embedded as well as general
- * software development.
  */
 
 /*=============================================================================
@@ -32,6 +30,10 @@
 #define PICOUNIT_H
 
 #include <stddef.h>  /* NULL */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * Asserts that the given expression evaluates to `true` (non-zero). If the
@@ -81,10 +83,6 @@
  * @param p_suite The test suite function to run
  */
 #define PUNIT_RUN_SUITE(p_suite) punit_run_suite(#p_suite, p_suite)
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * Turns on terminal colors. NOTE: Off by default.

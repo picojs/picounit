@@ -2,13 +2,11 @@ picounit
 ========
 
 *picounit* is a minimal, yet powerful unit testing framework written in ANSI C.
-Due to its small footprint, it is suitable for embedded as well as general
-development.
 
 Features:
 --------
 
-- Written in pure ANSI C, but also compatible with C++
+- Written in pure ANSI C, but compatible with C++
 - Only two files (header/source) for easy integration into any build system
 - Tiny memory and code footprint
 - Simple and minimalistic API
