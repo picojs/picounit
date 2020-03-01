@@ -43,8 +43,10 @@ extern "C" {
  * @param expr The expression to evaluate
  */
 #define PUNIT_ASSERT(expr) \
-    if (!punit_assert((expr) ? 1 : 0, (#expr), __FILE__, __LINE__)) \
-        return 0
+    do  { \
+        if (!punit_assert((expr) ? 1 : 0, (#expr), __FILE__, __LINE__)) \
+            return 0; \
+    } while(0)
 
 /**
  * Runs a unit test function. IMPORTANT: The function `p_test` must
