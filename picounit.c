@@ -166,7 +166,7 @@ punit_run_suite (const char* const p_name, punit_suite_t p_suite)
 }
 
 void
-punit_print_stats()
+punit_print_stats ()
 {
     printf("===============================================================\n");
     printf("Summary: Passed: %u, Failed: %u, Total: %u, Suites: %u, Asserts: %u\n",

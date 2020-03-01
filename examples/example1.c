@@ -23,7 +23,7 @@
 =============================================================================*/
 
 /**
- * For a more complete demonstration, see ex2.c
+ * For a more complete demonstration, see example2.c
  */
 
 #include <picounit.h>
@@ -47,7 +47,7 @@ test2 ()
 {
     PUNIT_ASSERT(2 + 2 != 4);                 /* Boolean assertion (fails) */
     PUNIT_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
-                                             /* (fails but never called)  */
+                                              /* (fails but never called)  */
     return 1;
 }
 
@@ -57,13 +57,13 @@ test3 ()
 {
     PUNIT_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok)    */
     PUNIT_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
-                                             /* (fails)                   */
+                                              /* (fails)                   */
     return 1;
 }
 
 /* Test suite container function (multiple test suits can be specified. */
 void
-test_suite()
+test_suite ()
 {
     PUNIT_RUN_TEST(test1);
     PUNIT_RUN_TEST(test2);
