@@ -24,7 +24,7 @@
 
 #include <picounit.h>
 
-#include <stdio.h>
+#include <string.h> /* strcmp */
 
 static unsigned g_fix = 0;
 
@@ -33,7 +33,7 @@ int test_passing1 ()
 {
     PUNIT_ASSERT(1);
     PUNIT_ASSERT(42 == 42);
-    PUNIT_ASSERT_STR_EQ("towel", "towel");
+    PUNIT_ASSERT(0 == strcmp("towel", "towel"));
     return 1;
 }
 
@@ -56,7 +56,7 @@ void test_teardown ()
 int test_passing2 ()
 {
     PUNIT_ASSERT(42 == g_fix);
-    PUNIT_ASSERT_STR_EQ("frog", "frog");
+    PUNIT_ASSERT(0 == strcmp("frog", "frog"));
     return 1;
 }
 
@@ -72,8 +72,8 @@ int test_failing1 ()
 /* Another test containing a failed assertion. */
 int test_failing2 ()
 {
-    PUNIT_ASSERT_STR_EQ("frog", "butterfly"); /* Fails here */
-    PUNIT_ASSERT(1);                          /* Never called */
+    PUNIT_ASSERT(0 == strcmp("frog", "butterfly")); /* Fails here */
+    PUNIT_ASSERT(1);                                /* Never called */
     return 1;
 }
 

@@ -28,14 +28,6 @@ an error message is displayed.
 
 - `expr` - The expression to evaluate
 
-#### PUNIT_ASSERT_STR_EQ(p_left_str, p_right_str)
-
-Asserts that the given strings are equal. If the strings are not equal,
-execution of the current test aborts and an error message is displayed.
-
-- `p_left_str` - A string to compare
-- `p_right_str` - A string to compare
-
 #### PUNIT_RUN_TEST(p_test)
 
 Runs a unit test function. **IMPORTANT**: The function `p_test` must
@@ -76,40 +68,41 @@ Example:
 ```C
 #include <picounit.h>
 
+#include <string.h> /* strcmp */
+
 /*
  * Passing test. Note that the test function declaration returns an integer
- * value and that the test definition returns `1`. All test functions must
- * return a non-zero value.
+ * value and that the test definition returns 1. All test functions
+ * must return a non-zero value.
  */
 int
 test1 ()
 {
-    PUNIT_ASSERT(2 + 2 == 4);                /* Simple boolean assertion (ok)  */
-    PUNIT_ASSERT_STR_EQ("apples", "apples"); /* String equality assertion (ok) */
+    PUNIT_ASSERT(2 + 2 == 4);                      /* Boolean assertion (ok)         */
+    PUNIT_ASSERT(0 == strcmp("apples", "apples")); /* String equality assertion (ok) */
     return 1;
 }
 
-/* Failing test. */
+/* Failing test */
 int
 test2 ()
 {
-    PUNIT_ASSERT(2 + 2 != 4);                 /* Boolean assertion (fails) */
-    PUNIT_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
-                                              /* (fails but never called)  */
+    PUNIT_ASSERT(2 + 2 != 4);                       /* Boolean assertion (fails) */
+    PUNIT_ASSERT(0 == strcmp("apples", "oranges")); /* String equality (fails */
+                                                    /* but is never called)  */
     return 1;
 }
 
-/* Mixed results. */
+/* Mixed results */
 int
 test3 ()
 {
-    PUNIT_ASSERT(2 + 2 == 4);                 /* Simple boolean assertion (ok) */
-    PUNIT_ASSERT_STR_EQ("apples", "oranges"); /* String equality assertion */
-                                              /* (fails)                   */
+    PUNIT_ASSERT(2 + 2 == 4);                       /* Boolean assertion (ok) */
+    PUNIT_ASSERT(0 == strcmp("apples", "oranges")); /* String equality fails */
     return 1;
 }
 
-/* Test suite container function (multiple test suits can be specified). */
+/* Test suite container function (multiple test suits can be specified. */
 void
 test_suite ()
 {
@@ -126,6 +119,7 @@ main (int argc, char* argv[])
     return 0;
 }
 ```
+
 Output:
 --------
 
@@ -133,10 +127,10 @@ Output:
 > Running: test_suite<br/>
 > ---------------------------------------------------------------<br/>
 > Running: test1 (OK)<br/>
-> Running: test2 (FAILED: example1.c (48): 2 + 2 != 4)<br/>
-> Running: test3 (FAILED: example1.c (59): "apples" == "oranges")<br/>
+> Running: test2 (FAILED: example1.c (50): 2 + 2 != 4)<br/>
+> Running: test3 (FAILED: example1.c (61): 0 == strcmp("apples", "oranges"))<br/>
 > ===============================================================<br/>
-> Summary: Passed: 1, Failed: 2, Total: 3, Suites: 1, Asserts: 5
+> Summary: Passed: 1, Failed: 2, Total: 3, Suites: 1, Asserts: 5<br/>
 
 ## License
 Copyright (c) 2020 James McLean.<br/>

@@ -29,7 +29,7 @@
 #ifndef PICOUNIT_H
 #define PICOUNIT_H
 
-#include <stddef.h>  /* NULL */
+#include <stddef.h> /* NULL */
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,17 +44,6 @@ extern "C" {
  */
 #define PUNIT_ASSERT(expr) \
     if (!punit_assert((expr) ? 1 : 0, (#expr), __FILE__, __LINE__)) \
-        return 0
-
-/**
- * Asserts that the given strings are equal. If the strings are not equal,
- * execution of the current test aborts and an error message is displayed.
- *
- * @param p_left_str  A string to compare
- * @param p_right_str A string to compare
- */
-#define PUNIT_ASSERT_STR_EQ(p_left_str, p_right_str) \
-    if (!punit_assert_str_eq(p_left_str, p_right_str, __FILE__, __LINE__)) \
         return 0
 
 /**
@@ -113,11 +102,6 @@ int punit_assert(int b_expr,
                 const char* const p_expr,
                 const char* const p_file,
                 int line);
-
-int punit_assert_str_eq(const char* const p_left_str,
-                       const char* const p_right_str,
-                       const char* const p_file,
-                       int line);
 
 void punit_run_test(const char* const p_name,
                    punit_test_t p_test,
