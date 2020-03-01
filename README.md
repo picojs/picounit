@@ -30,15 +30,18 @@ an error message is displayed.
 
 #### PUNIT_RUN_TEST(p_test)
 
-Runs a unit test function. **IMPORTANT**: The function `p_test` must
-return `true` (non-zero).
+Runs a unit test function. **IMPORTANT:** The function `p_test` must
+return `true` (non-zero). The test function has the signature,
+`int test_func(void)`.
 
 - `p_test` - The test function to execute
 
 #### PUNIT_RUN_TEST_ST(p_test, p_setup, p_teardown)
 
 Runs a unit test function with setup and teardown functions. Either one of
-`p_setup` or `p_teardown` can be `NULL`.
+`p_setup` or `p_teardown` can be `NULL`. The test function has the
+signature, `int test_func(void)`, whereas the setup and teardown functions
+both have the signature, `void st_func(void)`.
 
 - `p_test` - The test function to execute
 - `p_setup` - Setup function that is run before the test function
@@ -46,7 +49,8 @@ Runs a unit test function with setup and teardown functions. Either one of
 
 #### PUNIT_RUN_SUITE(p_suite)
 
-Runs a series of unit tests.
+Runs a series of unit tests. The test suite function has the signature,
+`void suite_func(void)`.
 
 - `p_suite` - The test suite function to run
 
@@ -133,5 +137,5 @@ Output:
 > Summary: Passed: 1, Failed: 2, Total: 3, Suites: 1, Asserts: 5<br/>
 
 ## License
-Copyright (c) 2020 James McLean.<br/>
-Licensed under the MIT license.
+Copyright (c) 2020 James McLean<br/>
+Licensed under the MIT license

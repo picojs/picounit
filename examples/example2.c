@@ -1,7 +1,7 @@
 /*=============================================================================
  * MIT License
  *
- * Copyright (c) 2019 James McLean
+ * Copyright (c) 2020 James McLean
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -102,3 +102,5 @@ int main (int argc, char** argv)
     punit_print_stats();
     return 0;
 }
+
+/* EoF */

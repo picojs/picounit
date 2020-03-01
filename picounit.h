@@ -48,7 +48,8 @@ extern "C" {
 
 /**
  * Runs a unit test function. IMPORTANT: The function `p_test` must
- * return `true` (non-zero).
+ * return `true` (non-zero). The test function has the following signature,
+ * `int test_func(void)`.
  *
  * @param p_test The test function to execute
  */
@@ -57,7 +58,9 @@ extern "C" {
 
 /**
  * Runs a unit test function with setup and teardown functions. Either one of
- * `p_setup` or `p_teardown` can be `NULL`.
+ * `p_setup` or `p_teardown` can be `NULL`. The test function has the
+ * signature, `int test_func(void)`, whereas the setup and teardown functions
+ * both have the signature, `void st_func(void)`.
  *
  * @param p_test     The test function to execute
  * @param p_setup    Setup function that is run before the test function
@@ -67,7 +70,8 @@ extern "C" {
     punit_run_test(#p_test, p_test, p_setup, p_teardown)
 
 /**
- * Runs a series of unit tests.
+ * Runs a series of unit tests. The test suite function has the signature,
+ * `void suite_func(void)`.
  *
  * @param p_suite The test suite function to run
  */
