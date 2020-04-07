@@ -33,7 +33,7 @@
 #define TERM_COLOR_CODE   0x1B
 #define TERM_COLOR_RED   "[1;31m"
 #define TERM_COLOR_GREEN "[1;32m"
-#define TERM_COLOR_BOLD  "[1;100m"
+#define TERM_COLOR_BOLD  "[1m"
 #define TERM_COLOR_RESET "[0m"
 
 static unsigned g_num_asserts  = 0;
