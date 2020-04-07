@@ -33,6 +33,7 @@
 #define TERM_COLOR_CODE   0x1B
 #define TERM_COLOR_RED   "[1;31m"
 #define TERM_COLOR_GREEN "[1;32m"
+#define TERM_COLOR_BOLD  "[1;100m"
 #define TERM_COLOR_RESET "[0m"
 
 static unsigned g_num_asserts  = 0;
@@ -126,7 +127,18 @@ void
 punit_run_suite (const char* const p_name, punit_suite_t p_suite)
 {
     printf("===============================================================\n");
-    printf("Running: %s\n", p_name);
+    
+    if (gb_colors)
+    {
+        printf("%c%sRunning: %s%c%s\n", TERM_COLOR_CODE, TERM_COLOR_BOLD, 
+                                        p_name, 
+                                        TERM_COLOR_CODE, TERM_COLOR_RESET);
+    }
+    else
+    {
+        printf("Running: %s\n", p_name);
+    } 
+    
     printf("---------------------------------------------------------------\n");
     p_suite();
     g_num_suites++;
