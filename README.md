@@ -1,7 +1,7 @@
 picounit
 ========
 
-*picounit* is a minimal, yet powerful unit testing framework written in ANSI C.
+*picounit* is a minimal, yet powerful unit testing framework written in C99.
 
 Features:
 --------
@@ -23,9 +23,9 @@ API:
 
 #### PUNIT_ASSERT(expr)
 
-Asserts that the given expression evaluates to `true` (non-zero). If the
-expression evalutes to `false` (zero), execution of the current test aborts and
-an error message is displayed.
+Asserts that the given expression evaluates to `true`. If the expression 
+evalutes to `false`, execution of the current test aborts and an error message 
+is displayed.
 
 - `expr` - The expression to evaluate
 
@@ -39,9 +39,8 @@ execution of the enclosing test aborts and an error message is displayed.
 
 #### PUNIT_RUN_TEST(p_test)
 
-Runs a unit test function. **IMPORTANT:** The function `p_test` must
-return `true` (non-zero). The test function has the signature,
-`bool test_func(void)`.
+Runs a unit test function. **IMPORTANT:** The function `p_test` must return 
+`true`. The test function has the signature, `bool test_func(void)`.
 
 - `p_test` - The test function to execute
 
@@ -95,9 +94,9 @@ Example:
 #include <string.h> /* strcmp */
 
 /*
- * Passing test. Note that the test function declaration returns an integer
- * value and that the test definition returns 1. All test functions
- * must return a non-zero value.
+ * Passing test. Note that the test function declaration returns a boolean value
+ * and that the test definition returns true. All test functions must return 
+ * true.
  */
 bool
 test1 ()

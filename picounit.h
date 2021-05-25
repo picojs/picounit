@@ -5,7 +5,7 @@
 /*=============================================================================
  * MIT License
  *
- * Copyright (c) 2021 James McLean
+ * Copyright (c) 2020 James McLean
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -38,9 +38,9 @@ extern "C" {
 #endif
 
 /**
- * Asserts that the given expression evaluates to `true` (non-zero). If the
- * expression evalutes to `false` (zero), execution of the current test aborts
- * and an error message is displayed.
+ * Asserts that the given expression evaluates to `true`. If the expression 
+ * evalutes to `false`, execution of the current test aborts and an error 
+ * message is displayed.
  *
  * @param expr The expression to evaluate
  */
@@ -64,9 +64,8 @@ extern "C" {
     } while(false)
 
 /**
- * Runs a unit test function. IMPORTANT: The function `p_test` must
- * return `true` (non-zero). The test function has the following signature,
- * `int test_func(void)`.
+ * Runs a unit test function. IMPORTANT: The function `p_test` must return 
+ * `true`. The test function has the signature, `bool test_func(void)`.
  *
  * @param p_test The test function to execute
  */

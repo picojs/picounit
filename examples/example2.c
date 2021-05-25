@@ -71,7 +71,7 @@ bool test_failing1 ()
 bool test_failing2 ()
 {
     PUNIT_ASSERT_STREQ("frog", "butterfly"); /* Fails here */
-    PUNIT_ASSERT(1);                         /* Never called */
+    PUNIT_ASSERT(true);                      /* Never called */
     return true;
 }
 
