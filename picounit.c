@@ -133,33 +133,38 @@ punit_run_test (const char* const p_name, punit_test_fn fp_test)
     if (!fp_test())
     {
         g_num_failed++;
+
+        if (NULL != gfp_teardown)
+        {
+            gfp_teardown();
+        }
+
+        return;
     }
-    else // TODO: refactor this
+
+    if (gb_time)
     {
-        if (gb_time)
-        {
-            end = clock();
-        }
-
-        if (gb_colors)
-        {
-            printf("(%c%sOK%c%s)", TERM_COLOR_CODE, TERM_COLOR_GREEN,
-                                   TERM_COLOR_CODE, TERM_COLOR_RESET);
-        }
-        else
-        {
-            printf("(OK)");
-        }
-
-        if (gb_time)
-        {
-            printf(" (%f secs)", (double)(end - start) / CLOCKS_PER_SEC);
-        }
-
-        printf("\n");
-
-        g_num_passed++;
+        end = clock();
     }
+
+    if (gb_colors)
+    {
+        printf("(%c%sOK%c%s)", TERM_COLOR_CODE, TERM_COLOR_GREEN,
+                               TERM_COLOR_CODE, TERM_COLOR_RESET);
+    }
+    else
+    {
+        printf("(OK)");
+    }
+
+    if (gb_time)
+    {
+        printf(" (%f secs)", (double)(end - start) / CLOCKS_PER_SEC);
+    }
+
+    printf("\n");
+
+    g_num_passed++;
 
     if (NULL != gfp_teardown)
     {

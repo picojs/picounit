@@ -132,7 +132,7 @@ void punit_time_off(void);
 void punit_print_stats(void);
 
 /*
- * NOTE: These functions are not meant to be called directly. Use the macros
+ * WARNING: These functions are not meant to be called directly. Use the macros
  * instead.
  */
 typedef bool (*punit_test_fn)(void);
