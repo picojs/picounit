@@ -28,38 +28,36 @@
 
 #include <picounit.h>
 
-#include <string.h> /* strcmp */
-
 /*
  * Passing test. Note that the test function declaration returns an integer
  * value and that the test definition returns 1. All test functions
  * must return a non-zero value.
  */
-int
+bool
 test1 ()
 {
-    PUNIT_ASSERT(2 + 2 == 4);                      /* Boolean assertion (ok)         */
-    PUNIT_ASSERT(0 == strcmp("apples", "apples")); /* String equality assertion (ok) */
-    return 1;
+    PUNIT_ASSERT(2 + 2 == 4);                /* Boolean assertion (ok)         */
+    PUNIT_ASSERT_STREQ("apples", "apples");  /* String equality assertion (ok) */
+    return true;
 }
 
 /* Failing test */
-int
+bool
 test2 ()
 {
-    PUNIT_ASSERT(2 + 2 != 4);                       /* Boolean assertion (fails) */
-    PUNIT_ASSERT(0 == strcmp("apples", "oranges")); /* String equality (fails */
-                                                    /* but is never called)  */
-    return 1;
+    PUNIT_ASSERT(2 + 2 != 4);                /* Boolean assertion (fails) */
+    PUNIT_ASSERT_STREQ("apples", "oranges"); /* String equality (fails */
+                                             /* but is never called)  */
+    return true;
 }
 
 /* Mixed results */
-int
+bool
 test3 ()
 {
-    PUNIT_ASSERT(2 + 2 == 4);                       /* Boolean assertion (ok) */
-    PUNIT_ASSERT(0 == strcmp("apples", "oranges")); /* String equality fails */
-    return 1;
+    PUNIT_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok) */
+    PUNIT_ASSERT_STREQ("apples", "oranges");  /* String equality fails */
+    return true;
 }
 
 /* Test suite container function (multiple test suits can be specified. */

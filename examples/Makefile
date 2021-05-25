@@ -1,5 +1,5 @@
 CC     = gcc
-CFLAGS = -std=c89 -Wall -pedantic -I ..
+CFLAGS = -std=c99 -Wall -pedantic -I ..
 DEPS   = ../picounit.h
 
 all: example1 example2

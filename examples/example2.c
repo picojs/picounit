@@ -24,18 +24,7 @@
 
 #include <picounit.h>
 
-#include <string.h> /* strcmp */
-
 static unsigned g_fix = 0;
-
-/* All assertions pass in this test. */
-int test_passing1 ()
-{
-    PUNIT_ASSERT(1);
-    PUNIT_ASSERT(42 == 42);
-    PUNIT_ASSERT(0 == strcmp("towel", "towel"));
-    return 1;
-}
 
 /* Sets up fixture for (called before test). */
 void test_setup ()
@@ -49,40 +38,53 @@ void test_teardown ()
     g_fix = 0;
 }
 
+/* All assertions pass in this test. */
+bool test_passing1 ()
+{
+    PUNIT_ASSERT(1);
+    PUNIT_ASSERT(42 == 42);
+    PUNIT_ASSERT_STREQ("towel", "towel");
+    return 1;
+}
+
 /*
  * All assertions pass in this test. Checks the value of the fixture initialized
  * in the test setup function.
  */
-int test_passing2 ()
+bool test_passing2 ()
 {
     PUNIT_ASSERT(42 == g_fix);
-    PUNIT_ASSERT(0 == strcmp("frog", "frog"));
-    return 1;
+    PUNIT_ASSERT_STREQ("frog", "frog");
+    return true;
 }
 
 /* Test containing failing assertion. */
-int test_failing1 ()
+bool test_failing1 ()
 {
     PUNIT_ASSERT(1);
     PUNIT_ASSERT(24 == 42); /* Fails here */
     PUNIT_ASSERT(1);        /* Never called */
-    return 1;
+    return true;
 }
 
 /* Another test containing a failed assertion. */
-int test_failing2 ()
+bool test_failing2 ()
 {
-    PUNIT_ASSERT(0 == strcmp("frog", "butterfly")); /* Fails here */
-    PUNIT_ASSERT(1);                                /* Never called */
-    return 1;
+    PUNIT_ASSERT_STREQ("frog", "butterfly"); /* Fails here */
+    PUNIT_ASSERT(1);                         /* Never called */
+    return true;
 }
 
 /* A test suite containing two passing and one failing test. */
 void test_suite1 ()
 {
+    punit_setup_teardown(test_setup, test_teardown);
+
     PUNIT_RUN_TEST(test_passing1);
-    PUNIT_RUN_TEST_ST(test_passing2, test_setup, test_teardown);
+    PUNIT_RUN_TEST(test_passing2);
     PUNIT_RUN_TEST(test_failing1);
+
+    punit_clear_setup_teardown();
 }
 
 /* A test suite containing two passing and one failing test. */
@@ -97,6 +99,7 @@ void test_suite2 ()
 int main (int argc, char** argv)
 {
     punit_colors_on();
+    punit_time_on();
     PUNIT_RUN_SUITE(test_suite1);
     PUNIT_RUN_SUITE(test_suite2);
     punit_print_stats();

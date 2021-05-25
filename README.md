@@ -36,17 +36,6 @@ return `true` (non-zero). The test function has the signature,
 
 - `p_test` - The test function to execute
 
-#### PUNIT_RUN_TEST_ST(p_test, p_setup, p_teardown)
-
-Runs a unit test function with setup and teardown functions. Either one of
-`p_setup` or `p_teardown` can be `NULL`. The test function has the
-signature, `int test_func(void)`, whereas the setup and teardown functions
-both have the signature, `void st_func(void)`.
-
-- `p_test` - The test function to execute
-- `p_setup` - Setup function that is run before the test function
-- `p_teardown` - Teardown function that is run after the test function
-
 #### PUNIT_RUN_SUITE(p_suite)
 
 Runs a series of unit tests. The test suite function has the signature,
@@ -61,6 +50,14 @@ Turns terminal colors on.
 #### punit_colors_off()
 
 Turns terminal colors off.
+
+#### punit_time_on()
+
+Turns time measurement on.
+
+#### punit_time_off()
+
+Turns time measurement off.
 
 #### punit_print_stats()
 
@@ -79,31 +76,32 @@ Example:
  * value and that the test definition returns 1. All test functions
  * must return a non-zero value.
  */
-int
+bool
 test1 ()
 {
-    PUNIT_ASSERT(2 + 2 == 4);                      /* Boolean assertion (ok)         */
-    PUNIT_ASSERT(0 == strcmp("apples", "apples")); /* String equality assertion (ok) */
-    return 1;
+    PUNIT_ASSERT(2 + 2 == 4);               /* Boolean assertion (ok)          
+    PUNIT_ASSERT(2 + 2 == 4);               /* Boolean assertion (ok)         */
+    PUNIT_ASSERT_STREQ("apples", "apples"); /* String equality assertion (ok) */
+    return true;
 }
 
 /* Failing test */
-int
+bool
 test2 ()
 {
-    PUNIT_ASSERT(2 + 2 != 4);                       /* Boolean assertion (fails) */
-    PUNIT_ASSERT(0 == strcmp("apples", "oranges")); /* String equality (fails */
-                                                    /* but is never called)  */
-    return 1;
+    PUNIT_ASSERT(2 + 2 != 4);                /* Boolean assertion (fails) */
+    PUNIT_ASSERT_STREQ("apples", "oranges"); /* String equality (fails    */
+                                             /* but is never called)      */
+    return true;
 }
 
 /* Mixed results */
-int
+bool
 test3 ()
 {
-    PUNIT_ASSERT(2 + 2 == 4);                       /* Boolean assertion (ok) */
-    PUNIT_ASSERT(0 == strcmp("apples", "oranges")); /* String equality fails */
-    return 1;
+    PUNIT_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok) */
+    PUNIT_ASSERT_STREQ("apples", "oranges");  /* String equality fails  */
+    return true;
 }
 
 /* Test suite container function (multiple test suits can be specified. */
@@ -132,10 +130,10 @@ Output:
 > ---------------------------------------------------------------<br/>
 > Running: test1 (OK)<br/>
 > Running: test2 (FAILED: example1.c (50): 2 + 2 != 4)<br/>
-> Running: test3 (FAILED: example1.c (61): 0 == strcmp("apples", "oranges"))<br/>
+> Running: test3 (FAILED: example1.c (61): "apples"=="oranges"))<br/>
 > ===============================================================<br/>
 > Summary: Passed: 1, Failed: 2, Total: 3, Suites: 1, Asserts: 5<br/>
 
 ## License
-Copyright (c) 2020 James McLean<br/>
+Copyright (c) 2021 James McLean<br/>
 Licensed under the MIT license

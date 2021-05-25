@@ -1,7 +1,7 @@
 /*=============================================================================
  * MIT License
  *
- * Copyright (c) 2020 James McLean
+ * Copyright (c) 2021 James McLean
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -29,6 +29,7 @@
 #include "picounit.h"
 
 #include <stdio.h> /* printf */
+#include <time.h>
 
 #define TERM_COLOR_CODE   0x1B
 #define TERM_COLOR_RED   "[1;31m"
@@ -40,62 +41,94 @@ static unsigned g_num_asserts  = 0;
 static unsigned g_num_passed   = 0;
 static unsigned g_num_failed   = 0;
 static unsigned g_num_suites   = 0;
-static unsigned gb_colors      = 0;
+static bool     gb_colors      = false;
+static bool     gb_time        = false;
+
+static punit_setup_fn    gp_setup    = NULL;
+static punit_teardown_fn gp_teardown = NULL;
 
 void
-punit_colors_on ()
+punit_setup_teardown (punit_setup_fn p_setup, punit_teardown_fn p_teardown)
 {
-    gb_colors = 1;
+    gp_setup = p_setup;
+    gp_teardown = p_teardown;
 }
 
 void
-punit_colors_off ()
+punit_clear_setup_teardown (void)
 {
-    gb_colors = 0;
+    gp_setup = NULL;
+    gp_teardown = NULL;
 }
 
-int
-punit_assert (int b_passed,
-             const char* const p_expr,
-             const char* const p_file,
-             int line)
+void
+punit_colors_on (void)
+{
+    gb_colors = true;
+}
+
+void
+punit_colors_off (void)
+{
+    gb_colors = false;
+}
+
+void
+punit_time_on (void)
+{
+    gb_time = true;
+}
+
+void
+punit_time_off (void)
+{
+    gb_time = false;
+}
+
+bool
+punit_assert (bool b_passed,
+              const char* const p_expr,
+              const char* const p_file,
+              int line)
 {
     g_num_asserts++;
 
     if (b_passed)
     {
-        return 1;
+        return true;
+    }
+
+    if (gb_colors)
+    {
+        printf("(%c%sFAILED%c%s: %s (%d): %s)\n",
+               TERM_COLOR_CODE, TERM_COLOR_RED,
+               TERM_COLOR_CODE, TERM_COLOR_RESET,
+               p_file, line, p_expr);
     }
     else
     {
-        if (gb_colors)
-        {
-            printf("(%c%sFAILED%c%s: %s (%d): %s)\n",
-                   TERM_COLOR_CODE, TERM_COLOR_RED,
-                   TERM_COLOR_CODE, TERM_COLOR_RESET,
-                   p_file, line, p_expr);
-        }
-        else
-        {
-            printf("(FAILED: %s (%d): %s)\n", p_file, line, p_expr);
-        }
-
-        return 0;
+        printf("(FAILED: %s (%d): %s)\n", p_file, line, p_expr);
     }
+
+    return false;
 }
 
 void
-punit_run_test (const char* const p_name,
-               punit_test_t p_test,
-               punit_setup_t p_setup,
-               punit_teardown_t p_teardown)
+punit_run_test (const char* const p_name, punit_test_fn p_test)
 {
-    if (NULL != p_setup)
+    if (NULL != gp_setup)
     {
-        p_setup();
+        gp_setup();
     }
 
     printf("Running: %s ", p_name);
+
+    clock_t start, end;
+
+    if (gb_time)
+    {
+        start = clock();
+    }
 
     if (!p_test())
     {
@@ -103,49 +136,60 @@ punit_run_test (const char* const p_name,
     }
     else
     {
+        if (gb_time)
+        {
+            end = clock();
+        }
+
         if (gb_colors)
         {
-            printf("(%c%sOK%c%s)\n", TERM_COLOR_CODE, TERM_COLOR_GREEN,
-                                     TERM_COLOR_CODE, TERM_COLOR_RESET);
+            printf("(%c%sOK%c%s)", TERM_COLOR_CODE, TERM_COLOR_GREEN,
+                                   TERM_COLOR_CODE, TERM_COLOR_RESET);
         }
         else
         {
-            printf("(OK)\n");
+            printf("(OK)");
         }
 
+        if (gb_time)
+        {
+            printf(" (%f secs)", (double)(end - start) / CLOCKS_PER_SEC);
+        }
+
+        printf("\n");
 
         g_num_passed++;
     }
 
-    if (NULL != p_teardown)
+    if (NULL != gp_teardown)
     {
-        p_teardown();
+        gp_teardown();
     }
 }
 
 void
-punit_run_suite (const char* const p_name, punit_suite_t p_suite)
+punit_run_suite (const char* const p_name, punit_suite_fn p_suite)
 {
     printf("===============================================================\n");
-    
+
     if (gb_colors)
     {
-        printf("%c%sRunning: %s%c%s\n", TERM_COLOR_CODE, TERM_COLOR_BOLD, 
-                                        p_name, 
+        printf("%c%sRunning: %s%c%s\n", TERM_COLOR_CODE, TERM_COLOR_BOLD,
+                                        p_name,
                                         TERM_COLOR_CODE, TERM_COLOR_RESET);
     }
     else
     {
         printf("Running: %s\n", p_name);
-    } 
-    
+    }
+
     printf("---------------------------------------------------------------\n");
     p_suite();
     g_num_suites++;
 }
 
 void
-punit_print_stats ()
+punit_print_stats (void)
 {
     printf("===============================================================\n");
     printf("Summary: Passed: %u, Failed: %u, Total: %u, Suites: %u, Asserts: %u\n",
