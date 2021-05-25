@@ -29,7 +29,7 @@
 #include "picounit.h"
 
 #include <stdio.h> /* printf */
-#include <time.h>
+#include <time.h>  /* clock_t, clock */
 
 #define TERM_COLOR_CODE   0x1B
 #define TERM_COLOR_RED   "[1;31m"
@@ -44,21 +44,21 @@ static unsigned g_num_suites   = 0;
 static bool     gb_colors      = false;
 static bool     gb_time        = false;
 
-static punit_setup_fn    gp_setup    = NULL;
-static punit_teardown_fn gp_teardown = NULL;
+static punit_setup_fn    gfp_setup    = NULL;
+static punit_teardown_fn gfp_teardown = NULL;
 
 void
 punit_setup_teardown (punit_setup_fn p_setup, punit_teardown_fn p_teardown)
 {
-    gp_setup = p_setup;
-    gp_teardown = p_teardown;
+    gfp_setup = p_setup;
+    gfp_teardown = p_teardown;
 }
 
 void
 punit_clear_setup_teardown (void)
 {
-    gp_setup = NULL;
-    gp_teardown = NULL;
+    gfp_setup = NULL;
+    gfp_teardown = NULL;
 }
 
 void
@@ -114,11 +114,11 @@ punit_assert (bool b_passed,
 }
 
 void
-punit_run_test (const char* const p_name, punit_test_fn p_test)
+punit_run_test (const char* const p_name, punit_test_fn fp_test)
 {
-    if (NULL != gp_setup)
+    if (NULL != gfp_setup)
     {
-        gp_setup();
+        gfp_setup();
     }
 
     printf("Running: %s ", p_name);
@@ -130,11 +130,11 @@ punit_run_test (const char* const p_name, punit_test_fn p_test)
         start = clock();
     }
 
-    if (!p_test())
+    if (!fp_test())
     {
         g_num_failed++;
     }
-    else
+    else // TODO: refactor this
     {
         if (gb_time)
         {
@@ -161,14 +161,14 @@ punit_run_test (const char* const p_name, punit_test_fn p_test)
         g_num_passed++;
     }
 
-    if (NULL != gp_teardown)
+    if (NULL != gfp_teardown)
     {
-        gp_teardown();
+        gfp_teardown();
     }
 }
 
 void
-punit_run_suite (const char* const p_name, punit_suite_fn p_suite)
+punit_run_suite (const char* const p_name, punit_suite_fn fp_suite)
 {
     printf("===============================================================\n");
 
@@ -184,7 +184,7 @@ punit_run_suite (const char* const p_name, punit_suite_fn p_suite)
     }
 
     printf("---------------------------------------------------------------\n");
-    p_suite();
+    fp_suite();
     g_num_suites++;
 }
 

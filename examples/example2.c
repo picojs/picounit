@@ -44,7 +44,7 @@ bool test_passing1 ()
     PUNIT_ASSERT(1);
     PUNIT_ASSERT(42 == 42);
     PUNIT_ASSERT_STREQ("towel", "towel");
-    return 1;
+    return true;
 }
 
 /*

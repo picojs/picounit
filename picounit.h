@@ -69,7 +69,7 @@ extern "C" {
  *
  * @param p_test The test function to execute
  */
-#define PUNIT_RUN_TEST(p_test) (punit_run_test(#p_test, p_test))
+#define PUNIT_RUN_TEST(fp_test) (punit_run_test(#fp_test, fp_test))
 
 /**
  * Runs a series of unit tests. The test suite function has the signature,
@@ -77,7 +77,7 @@ extern "C" {
  *
  * @param p_suite The test suite function to run
  */
-#define PUNIT_RUN_SUITE(p_suite) punit_run_suite(#p_suite, p_suite)
+#define PUNIT_RUN_SUITE(fp_suite) punit_run_suite(#fp_suite, fp_suite)
 
 /**
  * Functions that are run before a number of unit tests execute.
@@ -99,7 +99,7 @@ typedef void (*punit_teardown_fn)(void);
  * @param p_teardown The teardown function
  *
  */
-void punit_setup_teardown(punit_setup_fn p_setup, punit_teardown_fn p_teardown);
+void punit_setup_teardown(punit_setup_fn fp_setup, punit_teardown_fn fp_teardown);
 
 /**
  * Disables the setup and teardown functions by setting them to NULL.
@@ -143,8 +143,8 @@ bool punit_assert(bool b_expr,
                   const char* const p_file,
                   int line);
 
-void punit_run_test(const char* const p_name, punit_test_fn p_test);
-void punit_run_suite(const char* const p_name, punit_suite_fn p_suite);
+void punit_run_test(const char* const p_name, punit_test_fn fp_test);
+void punit_run_suite(const char* const p_name, punit_suite_fn fp_suite);
 
 #ifdef __cplusplus
 }
