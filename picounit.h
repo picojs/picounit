@@ -31,7 +31,7 @@
 
 #include <stdbool.h> /* bool, true, false */
 #include <stddef.h>  /* NULL */
-#include <string.h> /* strcmp */
+#include <string.h>  /* strcmp */
 
 #ifdef __cplusplus
 extern "C" {
@@ -54,8 +54,8 @@ extern "C" {
  * Asserts that the given strings are equal. If the strings are not equal,
  * execution of the enclosing test aborts and an error message is displayed.
  *
- * @param str1 String for comparison
- * @param str2 String for comparison
+ * @param str1 A string for comparison
+ * @param str2 A string for comparison
  */
 #define PUNIT_ASSERT_STREQ(str1, str2) \
     do  { \
@@ -93,7 +93,8 @@ typedef void (*punit_teardown_fn)(void);
 /**
  * Sets the current setup and teardown functions. The setup function is called
  * prior to each unit test and the teardown function after. Either of these
- * functions can be NULL.
+ * functions can be `NULL`. The setup and teardown functions have the signature,
+ * `void func(void)`.
  *
  * @param p_setup The setup function
  * @param p_teardown The teardown function
@@ -102,7 +103,7 @@ typedef void (*punit_teardown_fn)(void);
 void punit_setup_teardown(punit_setup_fn p_setup, punit_teardown_fn p_teardown);
 
 /**
- * Sets the setup and teardown functions to NULL.
+ * Disables the setup and teardown functions by setting them to NULL.
  */
 void punit_clear_setup_teardown(void);
 
