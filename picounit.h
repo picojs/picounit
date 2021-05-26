@@ -38,8 +38,8 @@ extern "C" {
 #endif
 
 /**
- * Asserts that the given expression evaluates to `true`. If the expression 
- * evalutes to `false`, execution of the current test aborts and an error 
+ * Asserts that the given expression evaluates to `true`. If the expression
+ * evalutes to `false`, execution of the current test aborts and an error
  * message is displayed.
  *
  * @param expr The expression to evaluate
@@ -64,10 +64,10 @@ extern "C" {
     } while(false)
 
 /**
- * Runs a unit test function. IMPORTANT: The function `p_test` must return 
+ * Runs a unit test function. IMPORTANT: The function `fp_test` must return
  * `true`. The test function has the signature, `bool test_func(void)`.
  *
- * @param p_test The test function to execute
+ * @param fp_test The test function to execute
  */
 #define PUNIT_RUN_TEST(fp_test) (punit_run_test(#fp_test, fp_test))
 
@@ -75,7 +75,7 @@ extern "C" {
  * Runs a series of unit tests. The test suite function has the signature,
  * `void suite_func(void)`.
  *
- * @param p_suite The test suite function to run
+ * @param fp_suite The test suite function to run
  */
 #define PUNIT_RUN_SUITE(fp_suite) punit_run_suite(#fp_suite, fp_suite)
 
@@ -95,14 +95,14 @@ typedef void (*punit_teardown_fn)(void);
  * functions can be `NULL`. The setup and teardown functions have the signature,
  * `void func(void)`.
  *
- * @param p_setup The setup function
- * @param p_teardown The teardown function
+ * @param fp_setup The setup function
+ * @param fp_teardown The teardown function
  *
  */
 void punit_setup_teardown(punit_setup_fn fp_setup, punit_teardown_fn fp_teardown);
 
 /**
- * Disables the setup and teardown functions by setting them to NULL.
+ * Disables the setup and teardown functions by setting them to `NULL`.
  */
 void punit_clear_setup_teardown(void);
 

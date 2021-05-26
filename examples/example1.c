@@ -33,7 +33,7 @@
  * and that the test definition returns true. All test functions must return
  * true.
  */
-bool
+static bool
 test1 ()
 {
     PUNIT_ASSERT(2 + 2 == 4);                /* Boolean assertion (ok)         */
@@ -42,7 +42,7 @@ test1 ()
 }
 
 /* Failing test */
-bool
+static bool
 test2 ()
 {
     PUNIT_ASSERT(2 + 2 != 4);                /* Boolean assertion (fails) */
@@ -52,7 +52,7 @@ test2 ()
 }
 
 /* Mixed results */
-bool
+static bool
 test3 ()
 {
     PUNIT_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok) */
@@ -60,8 +60,8 @@ test3 ()
     return true;
 }
 
-/* Test suite container function (multiple test suits can be specified. */
-void
+/* Test suite container function (multiple test suites can be specified. */
+static void
 test_suite ()
 {
     PUNIT_RUN_TEST(test1);
@@ -70,7 +70,7 @@ test_suite ()
 }
 
 int
-main (int argc, char* argv[])
+main ()
 {
     PUNIT_RUN_SUITE(test_suite);
     punit_print_stats(); /* Optional */

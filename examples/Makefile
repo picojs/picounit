@@ -1,5 +1,9 @@
-CC     = gcc
-CFLAGS = -std=c99 -Wall -pedantic -I ..
+#CC     = gcc
+#CFLAGS = -std=c99 -Wall -pedantic -I ..
+
+CC     = clang
+CFLAGS = -std=c99 -Wall -Wextra -Weverything -Wpedantic -I ..
+
 DEPS   = ../picounit.h
 
 all: example1 example2

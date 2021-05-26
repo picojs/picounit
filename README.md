@@ -23,8 +23,8 @@ API:
 
 #### PUNIT_ASSERT(expr)
 
-Asserts that the given expression evaluates to `true`. If the expression 
-evalutes to `false`, execution of the current test aborts and an error message 
+Asserts that the given expression evaluates to `true`. If the expression
+evalutes to `false`, execution of the current test aborts and an error message
 is displayed.
 
 - `expr` - The expression to evaluate
@@ -39,17 +39,17 @@ execution of the enclosing test aborts and an error message is displayed.
 
 #### PUNIT_RUN_TEST(p_test)
 
-Runs a unit test function. **IMPORTANT:** The function `p_test` must return 
+Runs a unit test function. **IMPORTANT:** The function `fp_test` must return
 `true`. The test function has the signature, `bool test_func(void)`.
 
-- `p_test` - The test function to execute
+- `fp_test` - The test function to execute
 
 #### PUNIT_RUN_SUITE(p_suite)
 
 Runs a series of unit tests. The test suite function has the signature,
 `void suite_func(void)`.
 
-- `p_suite` - The test suite function to run
+- `fp_suite` - The test suite function to run
 
 #### void punit_setup_teardown(punit_setup_fn p_setup, punit_teardown_fn p_teardown);
 
@@ -58,8 +58,8 @@ prior to each unit test and the teardown function after. Either of these
 functions can be `NULL`. The setup and teardown functions have the signature,
 `void func(void)`.
 
-- `p_setup` - The setup function
-- `p_teardown` - The teardown function
+- `fp_setup` - The setup function
+- `fp_teardown` - The teardown function
 
 #### void punit_clear_setup_teardown(void);
 
@@ -95,13 +95,13 @@ Example:
 
 /*
  * Passing test. Note that the test function declaration returns a boolean value
- * and that the test definition returns true. All test functions must return 
+ * and that the test definition returns true. All test functions must return
  * true.
  */
 bool
 test1 ()
 {
-    PUNIT_ASSERT(2 + 2 == 4);               /* Boolean assertion (ok)
+    PUNIT_ASSERT(2 + 2 == 4);               /* Boolean assertion (ok)         */
     PUNIT_ASSERT(2 + 2 == 4);               /* Boolean assertion (ok)         */
     PUNIT_ASSERT_STREQ("apples", "apples"); /* String equality assertion (ok) */
     return true;
@@ -126,7 +126,7 @@ test3 ()
     return true;
 }
 
-/* Test suite container function (multiple test suits can be specified. */
+/* Test suite container function (multiple test suites can be specified. */
 void
 test_suite ()
 {

@@ -48,10 +48,10 @@ static punit_setup_fn    gfp_setup    = NULL;
 static punit_teardown_fn gfp_teardown = NULL;
 
 void
-punit_setup_teardown (punit_setup_fn p_setup, punit_teardown_fn p_teardown)
+punit_setup_teardown (punit_setup_fn fp_setup, punit_teardown_fn fp_teardown)
 {
-    gfp_setup = p_setup;
-    gfp_teardown = p_teardown;
+    gfp_setup = fp_setup;
+    gfp_teardown = fp_teardown;
 }
 
 void
