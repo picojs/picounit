@@ -27,19 +27,22 @@
 static unsigned g_fix = 0;
 
 /* Sets up fixture for (called before test). */
-static void test_setup ()
+static void
+test_setup ()
 {
     g_fix = 42;
 }
 
 /* Resets fixture (called after test). */
-void static test_teardown ()
+void static
+test_teardown ()
 {
     g_fix = 0;
 }
 
 /* All assertions pass in this test. */
-static bool test_passing1 ()
+static bool
+test_passing1 ()
 {
     PUNIT_ASSERT(1);
     PUNIT_ASSERT(42 == 42);
@@ -51,7 +54,8 @@ static bool test_passing1 ()
  * All assertions pass in this test. Checks the value of the fixture initialized
  * in the test setup function.
  */
-static bool test_passing2 ()
+static bool
+test_passing2 ()
 {
     PUNIT_ASSERT(42 == g_fix);
     PUNIT_ASSERT_STREQ("frog", "frog");
@@ -59,7 +63,8 @@ static bool test_passing2 ()
 }
 
 /* Test containing failing assertion. */
-static bool test_failing1 ()
+static bool
+test_failing1 ()
 {
     PUNIT_ASSERT(1);
     PUNIT_ASSERT(24 == 42); /* Fails here */
@@ -68,7 +73,8 @@ static bool test_failing1 ()
 }
 
 /* Another test containing a failed assertion. */
-static bool test_failing2 ()
+static bool
+test_failing2 ()
 {
     PUNIT_ASSERT_STREQ("frog", "butterfly"); /* Fails here */
     PUNIT_ASSERT(true);                      /* Never called */
@@ -76,7 +82,8 @@ static bool test_failing2 ()
 }
 
 /* A test suite containing two passing and one failing test. */
-static void test_suite1 ()
+static void
+test_suite1 ()
 {
     punit_setup_teardown(test_setup, test_teardown);
 
@@ -88,7 +95,8 @@ static void test_suite1 ()
 }
 
 /* A test suite containing two passing and one failing test. */
-static void test_suite2 ()
+static void
+test_suite2 ()
 {
     PUNIT_RUN_TEST(test_passing1);
     PUNIT_RUN_TEST(test_failing2);
@@ -96,7 +104,8 @@ static void test_suite2 ()
 }
 
 /* Run all test suites and print test statistics. */
-int main ()
+int
+main ()
 {
     punit_colors_on();
     punit_time_on();
