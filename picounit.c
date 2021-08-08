@@ -123,11 +123,12 @@ punit_run_test (const char* const p_name, punit_test_fn fp_test)
 
     printf("Running: %s ", p_name);
 
-    clock_t start, end;
+    clock_t start_time = 0;
+    clock_t end_time = 0;
 
     if (gb_time)
     {
-        start = clock();
+        start_time = clock();
     }
 
     if (!fp_test())
@@ -144,7 +145,7 @@ punit_run_test (const char* const p_name, punit_test_fn fp_test)
 
     if (gb_time)
     {
-        end = clock();
+        end_time = clock();
     }
 
     if (gb_colors)
@@ -159,7 +160,7 @@ punit_run_test (const char* const p_name, punit_test_fn fp_test)
 
     if (gb_time)
     {
-        printf(" (%f secs)", (double)(end - start) / CLOCKS_PER_SEC);
+        printf(" (%f secs)", (double)(end_time - start_time) / CLOCKS_PER_SEC);
     }
 
     printf("\n");
