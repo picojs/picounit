@@ -78,13 +78,13 @@ PUNIT_TEST(test_failing2,
 static void
 test_suite1 ()
 {
-    punit_setup_teardown(test_setup, test_teardown);
+    punit_setup(test_setup, test_teardown);
 
     PUNIT_RUN_TEST(test_passing1);
     PUNIT_RUN_TEST(test_passing2);
     PUNIT_RUN_TEST(test_failing1);
 
-    punit_clear_setup_teardown();
+    punit_clear_setup();
 }
 
 /* A test suite containing two passing and one failing test. */

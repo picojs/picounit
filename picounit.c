@@ -44,18 +44,18 @@ static unsigned g_num_suites   = 0;
 static bool     gb_colors      = false;
 static bool     gb_time        = false;
 
-static punit_setup_fn    gfp_setup    = NULL;
-static punit_teardown_fn gfp_teardown = NULL;
+static punit_setup_fn gfp_setup    = NULL;
+static punit_setup_fn gfp_teardown = NULL;
 
 void
-punit_setup_teardown (punit_setup_fn fp_setup, punit_teardown_fn fp_teardown)
+punit_setup (punit_setup_fn fp_setup, punit_setup_fn fp_teardown)
 {
     gfp_setup = fp_setup;
     gfp_teardown = fp_teardown;
 }
 
 void
-punit_clear_setup_teardown (void)
+punit_clear_setup (void)
 {
     gfp_setup = NULL;
     gfp_teardown = NULL;

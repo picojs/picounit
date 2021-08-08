@@ -93,14 +93,9 @@ extern "C" {
 #define PUNIT_RUN_SUITE(fp_suite) punit_run_suite(#fp_suite, fp_suite)
 
 /**
- * Functions that are run before a number of unit tests execute.
+ * Functions that are run before or after a number of unit tests execute.
  */
 typedef void (*punit_setup_fn)(void);
-
-/**
- * Functions that are run after a number of unit tests execute.
- */
-typedef void (*punit_teardown_fn)(void);
 
 /**
  * Sets the current setup and teardown functions. The setup function is called
@@ -112,12 +107,12 @@ typedef void (*punit_teardown_fn)(void);
  * @param fp_teardown The teardown function
  *
  */
-void punit_setup_teardown(punit_setup_fn fp_setup, punit_teardown_fn fp_teardown);
+void punit_setup(punit_setup_fn fp_setup, punit_setup_fn fp_teardown);
 
 /**
  * Disables the setup and teardown functions by setting them to `NULL`.
  */
-void punit_clear_setup_teardown(void);
+void punit_clear_setup(void);
 
 /**
  * Turns on terminal colors. NOTE: Off by default.
