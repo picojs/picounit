@@ -34,26 +34,28 @@
  * true.
  */
 
-PUNIT_TEST(test1,
+PUNIT_TEST(test1)
 {
     PUNIT_ASSERT(2 + 2 == 4);                /* Boolean assertion (ok)         */
     PUNIT_ASSERT_STREQ("apples", "apples");  /* String equality assertion (ok) */
-})
+    return true;
+}
 
 /* Failing test */
-PUNIT_TEST(test2,
+PUNIT_TEST(test2)
 {
     PUNIT_ASSERT(2 + 2 != 4);                /* Boolean assertion (fails) */
     PUNIT_ASSERT_STREQ("apples", "oranges"); /* String equality (fails */
-})
+    return true;
+}
 
 /* Mixed results */
-PUNIT_TEST(test3,
+PUNIT_TEST(test3)
 {
     PUNIT_ASSERT(2 + 2 == 4);                 /* Boolean assertion (ok) */
     PUNIT_ASSERT_STREQ("apples", "oranges");  /* String equality fails */
     return true;
-})
+}
 
 /* Test suite container function (multiple test suites can be specified. */
 static void

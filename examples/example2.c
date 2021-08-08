@@ -41,38 +41,45 @@ test_teardown ()
 }
 
 /* All assertions pass in this test. */
-PUNIT_TEST(test_passing1,
+PUNIT_TEST(test_passing1)
 {
     PUNIT_ASSERT(1);
     PUNIT_ASSERT(42 == 42);
     PUNIT_ASSERT_STREQ("towel", "towel");
-})
+
+    return true;
+}
 
 /*
  * All assertions pass in this test. Checks the value of the fixture initialized
  * in the test setup function.
  */
-PUNIT_TEST(test_passing2,
+PUNIT_TEST(test_passing2)
 {
     PUNIT_ASSERT(42 == g_fix);
     PUNIT_ASSERT_STREQ("frog", "frog");
-})
+
+    return true;
+}
 
 /* Test containing failing assertion. */
-PUNIT_TEST(test_failing1,
+PUNIT_TEST(test_failing1)
 {
     PUNIT_ASSERT(1);
     PUNIT_ASSERT(24 == 42); /* Fails here */
     PUNIT_ASSERT(1);        /* Never called */
-})
+
+    return true;
+}
 
 /* Another test containing a failed assertion. */
-PUNIT_TEST(test_failing2,
+PUNIT_TEST(test_failing2)
 {
     PUNIT_ASSERT_STREQ("frog", "butterfly"); /* Fails here */
     PUNIT_ASSERT(true);                      /* Never called */
+
     return true;
-})
+}
 
 /* A test suite containing two passing and one failing test. */
 static void

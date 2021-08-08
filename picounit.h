@@ -41,14 +41,9 @@ extern "C" {
  * Defines a unit test.
  *
  * @param name The name of the test. Must be a valid C function name
- * @param block The test code
  */
-#define PUNIT_TEST(name, block) \
-    static bool name() \
-    {\
-        block \
-        return true; \
-    }
+#define PUNIT_TEST(name) \
+    static bool name()
 
 /**
  * Asserts that the given expression evaluates to `true`. If the expression
