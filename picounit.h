@@ -42,8 +42,7 @@ extern "C" {
  *
  * @param name The name of the test. Must be a valid C function name
  */
-#define PUNIT_TEST(name) \
-    static bool name()
+#define PUNIT_TEST(name) static bool name()
 
 /**
  * Asserts that the given expression evaluates to `true`. If the expression
@@ -78,6 +77,9 @@ extern "C" {
  * @param fp_test The test function to execute
  */
 #define PUNIT_RUN_TEST(fp_test) (punit_run_test(#fp_test, fp_test))
+
+//TODO: doc
+#define PUNIT_SUITE(name) void name()
 
 /**
  * Runs a series of unit tests. The test suite function has the signature,
